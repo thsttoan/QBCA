@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null; 
+    Layout = null;
 }
 @using System.Security.Claims
 
@@ -174,11 +174,16 @@
         }
 
         .notification-bell {
-            font-size: 20px;
-            color: #555;
-            cursor: pointer;
             position: relative;
         }
+
+            .notification-bell > .icon-wrapper {
+                font-size: 20px;
+                color: #555;
+                cursor: pointer;
+                position: relative;
+                display: inline-block;
+            }
 
         .notification-badge {
             position: absolute;
@@ -190,7 +195,128 @@
             padding: 2px 5px;
             border-radius: 50%;
             font-weight: bold;
+            display: none; /* Initially hidden, shown by JS if count > 0 */
         }
+
+        .notification-dropdown {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: calc(100% + 15px); /* Position below the bell */
+            right: -20px; /* Adjust as needed */
+            width: 360px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1001; /* Ensure it's above other content */
+            border: 1px solid #e0e0e0;
+            max-height: 400px; /* Allow scrolling for many notifications */
+            overflow-y: auto;
+        }
+
+            .notification-dropdown.active {
+                display: block; /* Shown when active class is added */
+            }
+
+
+        .notification-dropdown-header {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 15px;
+            color: #333;
+        }
+
+            .notification-dropdown-header .view-all-notifications-link { /* This class was in original, can be removed or reused if needed */
+                font-size: 13px;
+                color: #007bff;
+                text-decoration: none;
+                font-weight: normal;
+            }
+
+                .notification-dropdown-header .view-all-notifications-link:hover {
+                    text-decoration: underline;
+                }
+
+        .notification-dropdown-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .notification-dropdown-list li {
+                padding: 12px 15px;
+                border-bottom: 1px solid #f5f5f5;
+                font-size: 14px;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+
+                .notification-dropdown-list li:last-child {
+                    border-bottom: none;
+                }
+
+                .notification-dropdown-list li:hover {
+                    background-color: #f8f9fa;
+                }
+
+                .notification-dropdown-list li.no-notifications {
+                    text-align: center;
+                    color: #777;
+                    padding: 20px 15px;
+                    cursor: default;
+                }
+
+                    .notification-dropdown-list li.no-notifications:hover {
+                        background-color: transparent;
+                    }
+
+
+        .notification-item-icon {
+            font-size: 16px;
+            color: #667eea; /* Or other appropriate color */
+            margin-top: 2px; /* Align with text better */
+            width: 20px; /* Ensure consistent width */
+            text-align: center;
+        }
+
+        .notification-item-content {
+            flex-grow: 1;
+        }
+
+        .notification-item-text {
+            display: block;
+            color: #333;
+            margin-bottom: 3px;
+            line-height: 1.4;
+        }
+
+        .notification-item-meta {
+            font-size: 11px;
+            color: #7f8c8d;
+        }
+
+        .notification-dropdown-footer {
+            padding: 10px 15px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+            .notification-dropdown-footer a {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+                .notification-dropdown-footer a:hover {
+                    text-decoration: underline;
+                }
 
         .user-profile {
             display: flex;
@@ -487,7 +613,7 @@
             <span class="sidebar-logo-abbr">Q</span>
         </div>
         <ul class="sidebar-menu" id="sidebarMenu">
-
+            <!-- Dynamically populated by JS -->
         </ul>
         <div class="sidebar-toggle-container">
             <button class="sidebar-toggle" onclick="toggleSidebar()" id="sidebarToggleBtn">
@@ -503,9 +629,24 @@
                 <p class="university-name">UTH University - R&D Department</p>
             </div>
             <div class="header-right">
-                <div class="notification-bell">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge" id="notificationCount">0</span>
+                <div class="notification-bell" id="notificationBellContainerLayout">
+                    <span class="icon-wrapper" id="notificationIconWrapperLayout" title="Show Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationCountLayout">0</span>
+                    </span>
+                    <div class="notification-dropdown" id="notificationDropdownContentLayout">
+                        <div class="notification-dropdown-header">
+                            <span>Notifications</span>
+                            <!-- Optional: Add icons like checkmark or settings here if needed -->
+                        </div>
+                        <ul class="notification-dropdown-list" id="headerNotificationListLayout">
+                            <!-- Dynamically populated by JS -->
+                            <li class="no-notifications">No new notifications.</li>
+                        </ul>
+                        <div class="notification-dropdown-footer">
+                            <a href="@Url.Action("Index", "Notification")">View All Notifications</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="user-menu">
                     <div class="user-profile">
@@ -526,7 +667,6 @@
         </header>
 
         <main class="dashboard-container" id="dashboardContent">
-            
             <p>Loading dashboard...</p>
         </main>
     </div>
@@ -713,7 +853,7 @@
                     </div>
                 `
             }
-            
+
         };
 
         // --- Function to render UI based on role ---
@@ -736,7 +876,6 @@
                 return;
             }
 
-            // Update User Profile in Header
             profileUserNameEl.textContent = userFullName || roleData.name;
             profileUserRoleEl.textContent = roleData.name;
 
@@ -749,8 +888,6 @@
             }
             userAvatarEl.textContent = initials.toUpperCase() || roleData.avatarInitials;
 
-
-            // Create Sidebar Menu
             sidebarMenuEl.innerHTML = '';
             roleData.sidebarMenu.forEach(item => {
                 const li = document.createElement('li');
@@ -762,7 +899,6 @@
                 sidebarMenuEl.appendChild(li);
             });
 
-            // Display Dashboard Content
             dashboardContentEl.innerHTML = roleData.dashboardHtml;
             const welcomeNameElement = dashboardContentEl.querySelector(welcomeNameElSelector);
             if (welcomeNameElement) {
@@ -770,7 +906,7 @@
             }
 
             updateDynamicStats(roleKey);
-            updateNotifications(roleKey);
+            updateRoleSpecificNotifications(roleKey); // Renamed to avoid confusion with header notifications
         }
 
         // --- Function to toggle Sidebar ---
@@ -808,13 +944,15 @@
             }
         }
 
-        // --- Function to update notifications (placeholder) ---
-        function updateNotifications(roleKey) {
+        // --- Function to update role-specific notifications in the dashboard (placeholder) ---
+        function updateRoleSpecificNotifications(roleKey) {
             let notificationHtml = '<ul><li><span class="notification-info"><span class="notification-title" style="color:#888">No new notifications.</span></span></li></ul>';
-            let count = 0;
+            // This count is for dashboard notifications, not necessarily the header badge.
+            // The header badge is controlled by displayHeaderNotifications.
+            // let count = 0; // This 'count' variable was for the badge, which is now handled separately.
 
             if (roleKey === "rd-staff") {
-                count = 2;
+                // count = 2; // Example: if this count was for the badge
                 notificationHtml = `
                     <ul>
                         <li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">System algorithm updated for checking.</span><span class="notification-meta">15 mins ago</span></span></li>
@@ -822,7 +960,7 @@
                     </ul>`;
                 document.getElementById('rdNotifications') && (document.getElementById('rdNotifications').innerHTML = notificationHtml);
             } else if (roleKey === "lecturer") {
-                count = 1;
+                // count = 1;
                 notificationHtml = `
                     <ul>
                         <li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">New Task: Prepare 10 questions for "AI" subject.</span><span class="notification-meta">Just now</span></span></li>
@@ -830,7 +968,10 @@
                 document.getElementById('lecturerNotifications') && (document.getElementById('lecturerNotifications').innerHTML = notificationHtml);
             }
             // Add more for other roles
-            document.getElementById('notificationCount').textContent = count;
+            // The line below was updating a badge. If this is a separate count/badge, it needs a different ID.
+            // For now, the header badge is handled by displayHeaderNotifications.
+            // const generalNotificationBadge = document.getElementById('notificationCountLayout');
+            // if (generalNotificationBadge) generalNotificationBadge.textContent = count; // Corrected ID
         }
 
 
@@ -839,13 +980,14 @@
             const serverUserRole = '@User.FindFirst(ClaimTypes.Role)?.Value';
             const serverUserFullName = '@User.FindFirst("FullName")?.Value';
 
-            const currentUserRole = serverUserRole || "lecturer";
+            const currentUserRole = serverUserRole || "lecturer"; // Default to lecturer if not found
             const currentUserFullName = serverUserFullName || userRolesConfig[currentUserRole]?.name || "User";
 
             if (userRolesConfig[currentUserRole]) {
                 loadDashboardForRole(currentUserRole, currentUserFullName);
             } else {
                 console.error("User role is invalid or not found from server: ", currentUserRole);
+                // Fallback to a default role display
                 loadDashboardForRole('lecturer', 'Default Lecturer');
             }
 
@@ -862,8 +1004,69 @@
                 icon.classList.add('fa-chevron-left');
                 if(text) text.textContent = "Collapse";
             }
-        });
 
+            // --- Notification Dropdown Logic ---
+            const notificationIconWrapper = document.getElementById('notificationIconWrapperLayout');
+            const notificationDropdown = document.getElementById('notificationDropdownContentLayout');
+            const notificationBellContainer = document.getElementById('notificationBellContainerLayout');
+            const headerNotificationListEl = document.getElementById('headerNotificationListLayout');
+            const notificationCountBadgeEl = document.getElementById('notificationCountLayout');
+
+            function displayHeaderNotifications(notificationsData) {
+                headerNotificationListEl.innerHTML = ''; // Clear previous
+                if (!notificationsData || notificationsData.length === 0) {
+                    headerNotificationListEl.innerHTML = '<li class="no-notifications">No new notifications.</li>';
+                    if (notificationCountBadgeEl) {
+                        notificationCountBadgeEl.textContent = '0';
+                        notificationCountBadgeEl.style.display = 'none';
+                    }
+                    return;
+                }
+
+                notificationsData.forEach(notif => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <i class="${notif.icon || 'fas fa-info-circle'} notification-item-icon"></i>
+                        <div class="notification-item-content">
+                            <span class="notification-item-text">${notif.text}</span>
+                            <span class="notification-item-meta">${notif.time}</span>
+                        </div>
+                    `;
+                    if (notif.link) {
+                        li.addEventListener('click', () => { window.location.href = notif.link; });
+                    }
+                    headerNotificationListEl.appendChild(li);
+                });
+
+                if (notificationCountBadgeEl) {
+                    notificationCountBadgeEl.textContent = notificationsData.length;
+                    notificationCountBadgeEl.style.display = 'block';
+                }
+            }
+
+            // Sample data for header notifications - replace with actual data fetching
+            const sampleHeaderNotifications = [
+                
+                { icon: 'fas fa-user-plus', text: 'New feature: Bulk question import now available.', time: '2 hours ago', link: '#' },
+                { icon: 'fas fa-exclamation-triangle', text: 'System maintenance scheduled for this weekend.', time: '1 day ago', link: '#' }
+            ];
+
+            displayHeaderNotifications(sampleHeaderNotifications); // Populate with sample data
+
+            if (notificationIconWrapper && notificationDropdown && notificationBellContainer) {
+                notificationIconWrapper.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    notificationDropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (notificationDropdown.classList.contains('active') && !notificationBellContainer.contains(event.target)) {
+                        notificationDropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
     </script>
+
 </body>
 </html>

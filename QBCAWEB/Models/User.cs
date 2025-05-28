@@ -1,29 +1,41 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QBCAWEB.Models
 {
+    [Table("Users")]
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        [Column("UserID")]
+        public int UserID { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Username { get; set; } = string.Empty;
-
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [StringLength(100)]
+        [MaxLength(100)]
         public string FullName { get; set; } = string.Empty;
 
-        public string Phone { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(255)]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty; 
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        [Required]
+        [MaxLength(255)]
+        public string PasswordHash { get; set; } = string.Empty;
 
-        public bool IsActive { get; set; } = true;
+        [Required]
+        [Column("RoleID")]
+        public int RoleID { get; set; }
 
-        public string Role { get; set; } = "User";
+        
+        [ForeignKey("RoleID")]
+        public virtual Role? UserRole { get; set; } 
+
+        [Column("CreatedAt")]
+        public DateTime? CreatedAt { get; set; }
+
+        public bool? IsActive { get; set; }
+
     }
 }

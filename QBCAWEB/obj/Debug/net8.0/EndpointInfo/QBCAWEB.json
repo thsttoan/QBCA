@@ -229,17 +229,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserListResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelListResponseModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserListResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelListResponseModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserListResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelListResponseModel"
                 }
               }
             }
@@ -254,17 +254,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/CreateUserDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/CreateUserDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/CreateUserDto"
               }
             }
           }
@@ -275,17 +275,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               }
             }
@@ -316,17 +316,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               }
             }
@@ -353,17 +353,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UpdateUserDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UpdateUserDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UpdateUserDto"
               }
             }
           }
@@ -374,17 +374,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseModel"
+                  "$ref": "#/components/schemas/UserViewModelResponseModel"
                 }
               }
             }
@@ -450,6 +450,41 @@
           "statusCode": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUserDto": {
+        "required": [
+          "email",
+          "fullName",
+          "password",
+          "roleName"
+        ],
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "minLength": 6,
+            "type": "string"
+          },
+          "roleName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -538,52 +573,74 @@
         },
         "additionalProperties": false
       },
-      "User": {
+      "UpdateUserDto": {
         "required": [
-          "email",
-          "fullName",
-          "username"
+          "userID"
         ],
         "type": "object",
         "properties": {
-          "id": {
+          "userID": {
             "type": "integer",
             "format": "int32"
           },
-          "username": {
-            "maxLength": 50,
-            "minLength": 0,
-            "type": "string"
-          },
-          "email": {
-            "minLength": 1,
-            "type": "string",
-            "format": "email"
-          },
           "fullName": {
             "maxLength": 100,
-            "minLength": 0,
-            "type": "string"
-          },
-          "phone": {
             "type": "string",
             "nullable": true
           },
-          "createdDate": {
+          "email": {
+            "maxLength": 255,
             "type": "string",
-            "format": "date-time"
+            "format": "email",
+            "nullable": true
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
           },
           "isActive": {
-            "type": "boolean"
-          },
-          "role": {
-            "type": "string",
+            "type": "boolean",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "UserListResponseModel": {
+      "UserViewModel": {
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserViewModelListResponseModel": {
         "type": "object",
         "properties": {
           "success": {
@@ -596,7 +653,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User"
+              "$ref": "#/components/schemas/UserViewModel"
             },
             "nullable": true
           },
@@ -607,7 +664,7 @@
         },
         "additionalProperties": false
       },
-      "UserResponseModel": {
+      "UserViewModelResponseModel": {
         "type": "object",
         "properties": {
           "success": {
@@ -618,7 +675,7 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/UserViewModel"
           },
           "statusCode": {
             "type": "integer",

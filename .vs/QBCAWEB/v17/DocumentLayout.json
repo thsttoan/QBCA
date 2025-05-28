@@ -7,32 +7,12 @@
       "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\models\\authviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\models\\authviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\auth\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\auth\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\auth\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\auth\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,83 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Models\\ErrorViewModel.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "QBCAWEB\\Models\\ErrorViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T13:54:56.265Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthViewModels.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\AuthViewModels.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Models\\AuthViewModels.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\AuthViewModels.cs",
-              "RelativeToolTip": "QBCAWEB\\Models\\AuthViewModels.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T13:52:04.591Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ForgotPassword.cshtml",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Auth\\ForgotPassword.cshtml",
-              "RelativeDocumentMoniker": "QBCAWEB\\Views\\Auth\\ForgotPassword.cshtml",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Auth\\ForgotPassword.cshtml",
-              "RelativeToolTip": "QBCAWEB\\Views\\Auth\\ForgotPassword.cshtml",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAAAMYAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-28T13:25:14.657Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Logout.cshtml",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Auth\\Logout.cshtml",
-              "RelativeDocumentMoniker": "QBCAWEB\\Views\\Auth\\Logout.cshtml",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Auth\\Logout.cshtml",
-              "RelativeToolTip": "QBCAWEB\\Views\\Auth\\Logout.cshtml",
-              "ViewState": "AgIAACMAAAAAAAAAAAAuwFwAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-28T12:56:45.587Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Controllers\\AuthController.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "QBCAWEB\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T11:59:30.031Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Auth\\Login.cshtml",
-              "RelativeDocumentMoniker": "QBCAWEB\\Views\\Auth\\Login.cshtml",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Auth\\Login.cshtml",
-              "RelativeToolTip": "QBCAWEB\\Views\\Auth\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK0AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-28T10:50:34.484Z"
             },
             {
               "$type": "Document",
@@ -128,22 +36,35 @@
               "RelativeDocumentMoniker": "QBCAWEB\\Views\\Home\\Index.cshtml",
               "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "QBCAWEB\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAABACAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAABEEAAAAAAAAAAAAABgEAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-28T10:50:28.514Z",
+              "WhenOpened": "2025-05-28T19:37:30.129Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Program.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Program.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Program.cs",
-              "RelativeToolTip": "QBCAWEB\\Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\appsettings.json",
+              "RelativeDocumentMoniker": "QBCAWEB\\appsettings.json",
+              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\appsettings.json",
+              "RelativeToolTip": "QBCAWEB\\appsettings.json",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAwAkAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-28T19:03:38.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "QBCAWEB\\Controllers\\AuthController.cs",
+              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "QBCAWEB\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAK0AAAAAAAAAAAA5wLAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T10:41:58.818Z"
+              "WhenOpened": "2025-05-28T11:59:30.031Z"
             }
           ]
         }

@@ -141,3 +141,5 @@ E:\CNPM\Project\QBCAWEB\QBCAWEB\obj\Debug\net8.0\refint\QBCAWEB.dll
 E:\CNPM\Project\QBCAWEB\QBCAWEB\obj\Debug\net8.0\QBCAWEB.pdb
 E:\CNPM\Project\QBCAWEB\QBCAWEB\obj\Debug\net8.0\QBCAWEB.genruntimeconfig.cache
 E:\CNPM\Project\QBCAWEB\QBCAWEB\obj\Debug\net8.0\ref\QBCAWEB.dll
+E:\CNPM\Project\QBCAWEB\QBCAWEB\obj\Debug\net8.0\QBCAWEB.sourcelink.json
+E:\CNPM\Project\QBCAWEB\QBCAWEB\bin\Debug\net8.0\BCrypt.Net-Next.dll

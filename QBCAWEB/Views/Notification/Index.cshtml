@@ -1,0 +1,260 @@
+﻿@{
+    ViewData["Title"] = "Notifications";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@model List<QBCAWEB.Models.NotificationViewModel>
+
+<style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .page-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+    }
+
+    .notifications-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .notifications-header {
+        padding: 15px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .notifications-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+    .mark-all-read-btn {
+        font-size: 13px;
+        color: #007bff;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+        .mark-all-read-btn:hover {
+            text-decoration: underline;
+        }
+
+    .notification-item {
+        display: flex;
+        padding: 15px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s;
+    }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item.unread {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .notification-item:hover {
+            background-color: #e9ecef;
+        }
+
+    .notification-icon {
+        margin-right: 15px;
+        font-size: 20px;
+        color: #3498db;
+        flex-shrink: 0;
+        width: 25px;
+        text-align: center;
+        padding-top: 3px;
+    }
+
+    .notification-content {
+        flex-grow: 1;
+    }
+
+    .notification-title {
+        display: block;
+        font-size: 15px;
+        color: #333;
+        margin-bottom: 3px;
+    }
+
+    .notification-item.unread .notification-title {
+        font-weight: bold;
+    }
+
+    .notification-message {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 5px;
+    }
+
+    .notification-date {
+        font-size: 12px;
+        color: #7f8c8d;
+    }
+
+    .notification-actions {
+        flex-shrink: 0;
+        margin-left: 15px;
+    }
+
+        .notification-actions .action-icon {
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+    .notification-item a.notification-link-wrapper {
+        color: inherit;
+        text-decoration: none;
+        display: flex;
+        width: 100%;
+    }
+
+</style>
+
+<div class="page-header">
+    <h1 class="page-title">Your Notifications</h1>
+</div>
+
+<div class="notifications-container">
+    <div class="notifications-header">
+        <h3>All Notifications</h3>
+        <button class="mark-all-read-btn" id="markAllRead">Mark all as read</button>
+    </div>
+    <div id="notificationListBody">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var notification in Model)
+            {
+                <div class="notification-item @(notification.IsRead ? "" : "unread")" data-id="@notification.Id">
+                    <a href="@(string.IsNullOrEmpty(notification.LinkUrl) ? "#" : notification.LinkUrl)" class="notification-link-wrapper">
+                        <div class="notification-icon">
+                            @* Chọn icon dựa trên loại thông báo (ví dụ) *@
+                            @if (notification.Title.Contains("Task"))
+                            {
+                                <i class="fas fa-tasks"></i>
+                            }
+                            else if (notification.Title.Contains("Approved"))
+                            {
+
+                                <i class="fas fa-check-circle" style="color:green;"></i>
+                            }
+                            else if (notification.Title.Contains("Submitted") || notification.Title.Contains("Uploaded"))
+                            {
+
+                                <i class="fas fa-paper-plane"></i>
+                            }
+                            else if (notification.Title.Contains("Alert") || notification.Title.Contains("Maintenance"))
+                            {
+
+                                <i class="fas fa-exclamation-triangle" style="color:orange;"></i>
+                            }
+                            else
+                            {
+
+                                <i class="far fa-bell"></i>
+                            }
+                        </div>
+                        <div class="notification-content">
+                            <strong class="notification-title">@notification.Title</strong>
+                            <p class="notification-message">@notification.Message</p>
+                            <span class="notification-date">@notification.ReceivedDate.ToString("MMM dd, yyyy 'at' hh:mm tt")</span>
+                        </div>
+                    </a>
+                    <div class="notification-actions">
+                        @if (!notification.IsRead)
+                        {
+                            <a href="#" class="action-icon mark-as-read-single" title="Mark as read"><i class="far fa-envelope-open"></i></a>
+                        }
+                        @* <a href="#" class="action-icon action-icon-danger" title="Delete notification"><i class="fas fa-trash-alt"></i></a> *@
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div style="padding: 20px; text-align: center; color: #777;">
+                You have no new notifications.
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const markAllReadBtn = document.getElementById('markAllRead');
+            if(markAllReadBtn) {
+                markAllReadBtn.addEventListener('click', function () {
+                    // AJAX call to server to mark all as read
+                    fetch('@Url.Action("MarkAllAsRead", "Notification")', {
+                        method: 'POST',
+                        headers: {
+                            // Include AntiForgeryToken if your action requires it
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                                item.classList.remove('unread');
+                                const readIcon = item.querySelector('.mark-as-read-single');
+                                if(readIcon) readIcon.style.display = 'none';
+                            });
+                            alert('All notifications marked as read.');
+                            // Optionally update notification count in header
+                            // document.getElementById('notificationCount').textContent = '0';
+                        }
+                    })
+                    .catch(error => console.error('Error marking all as read:', error));
+                });
+            }
+
+            document.querySelectorAll('.mark-as-read-single').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const notificationItem = this.closest('.notification-item');
+                    const notificationId = notificationItem.dataset.id;
+
+                    // AJAX call to server to mark specific notification as read
+                    fetch(`@Url.Action("MarkAsRead", "Notification")?notificationId=${notificationId}`, {
+                         method: 'POST',
+                         headers: {
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value,
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            notificationItem.classList.remove('unread');
+                            this.style.display = 'none'; // Hide the "mark as read" button
+                             // Optionally update notification count in header
+                        }
+                    })
+                    .catch(error => console.error('Error marking as read:', error));
+                });
+            });
+        });
+    </script>
+}

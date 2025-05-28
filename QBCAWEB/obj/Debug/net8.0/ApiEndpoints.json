@@ -138,7 +138,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "QBCAWEB.Models.ResponseModel\u00601[[System.Collections.Generic.List\u00601[[QBCAWEB.Models.User, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "QBCAWEB.Models.ResponseModel\u00601[[System.Collections.Generic.List\u00601[[QBCAWEB.Models.UserViewModel, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -157,14 +157,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "QBCAWEB.Models.User",
+        "Name": "createUserDto",
+        "Type": "QBCAWEB.Models.CreateUserDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "QBCAWEB.Models.ResponseModel\u00601[[QBCAWEB.Models.User, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "QBCAWEB.Models.ResponseModel\u00601[[QBCAWEB.Models.UserViewModel, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -190,7 +190,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "QBCAWEB.Models.ResponseModel\u00601[[QBCAWEB.Models.User, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "QBCAWEB.Models.ResponseModel\u00601[[QBCAWEB.Models.UserViewModel, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -214,14 +214,14 @@
         "IsRequired": true
       },
       {
-        "Name": "user",
-        "Type": "QBCAWEB.Models.User",
+        "Name": "updateUserDto",
+        "Type": "QBCAWEB.Models.UpdateUserDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "QBCAWEB.Models.ResponseModel\u00601[[QBCAWEB.Models.User, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "QBCAWEB.Models.ResponseModel\u00601[[QBCAWEB.Models.UserViewModel, QBCAWEB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

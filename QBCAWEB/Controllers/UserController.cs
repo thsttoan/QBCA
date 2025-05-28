@@ -1,5 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// --- START OF FILE UserController.cs ---
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using QBCAWEB.Data;
 using QBCAWEB.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BCrypt.Net; // Thêm using cho BCrypt nếu chưa có ở đầu (đã có trong file AuthController của bạn)
 
 namespace QBCAWEB.Controllers
 {
@@ -7,87 +16,211 @@ namespace QBCAWEB.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private static List<User> _users = new List<User>
-        {
-            new User { Id = 1, Username = "admin", Email = "admin@qbcaweb.com", FullName = "Administrator", Role = "Admin" },
-            new User { Id = 2, Username = "toantester", Email = "toantester@qbcaweb.com", FullName = "Lê Trung Toàn", Role = "User" }
-         
-        };
+        private readonly ApplicationDbContext _context;
 
-        [HttpGet]
-        public ActionResult<ResponseModel<List<User>>> GetAll()
+        public UserController(ApplicationDbContext context)
         {
-            return Ok(ResponseModel<List<User>>.SuccessResult(_users, "Lấy danh sách người dùng thành công"));
+            _context = context;
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<ResponseModel<User>> GetById(int id)
+        // GET: api/User
+        [HttpGet]
+        public async Task<ActionResult<ResponseModel<List<UserViewModel>>>> GetAll()
         {
-            var user = _users.FirstOrDefault(u => u.Id == id);
+            var usersFromDb = await _context.Users
+                                        .Include(u => u.UserRole)
+                                        .ToListAsync();
+
+            var userViewModels = usersFromDb.Select(u => new UserViewModel
+            {
+                UserID = u.UserID,
+                FullName = u.FullName,
+                Email = u.Email,
+                RoleName = u.UserRole?.RoleName ?? "N/A",
+                RoleID = u.RoleID,
+                IsActive = u.IsActive,
+                CreatedAt = u.CreatedAt
+            }).ToList();
+
+            return Ok(ResponseModel<List<UserViewModel>>.SuccessResult(userViewModels, "Successfully retrieved user list."));
+        }
+
+        // GET: api/User/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ResponseModel<UserViewModel>>> GetById(int id)
+        {
+            var user = await _context.Users
+                                     .Include(u => u.UserRole)
+                                     .FirstOrDefaultAsync(u => u.UserID == id);
+
             if (user == null)
             {
-                return NotFound(ResponseModel<User>.ErrorResult("Không tìm thấy người dùng", 404));
+                return NotFound(ResponseModel<UserViewModel>.ErrorResult("User not found.", 404));
             }
-            return Ok(ResponseModel<User>.SuccessResult(user, "Lấy thông tin người dùng thành công"));
+
+            var userViewModel = new UserViewModel
+            {
+                UserID = user.UserID,
+                FullName = user.FullName,
+                Email = user.Email,
+                RoleName = user.UserRole?.RoleName ?? "N/A",
+                RoleID = user.RoleID,
+                IsActive = user.IsActive,
+                CreatedAt = user.CreatedAt
+            };
+
+            return Ok(ResponseModel<UserViewModel>.SuccessResult(userViewModel, "Successfully retrieved user information."));
         }
 
+        // POST: api/User
         [HttpPost]
-        public ActionResult<ResponseModel<User>> Create([FromBody] User user)
+        public async Task<ActionResult<ResponseModel<UserViewModel>>> Create([FromBody] CreateUserDto createUserDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ResponseModel<User>.ErrorResult("Dữ liệu không hợp lệ"));
+                var errorMessages = ModelState.Values.SelectMany(v => v.Errors)
+                                                   .Select(e => e.ErrorMessage);
+                string combinedErrorMessage = string.Join("; ", errorMessages);
+                if (string.IsNullOrEmpty(combinedErrorMessage))
+                {
+                    combinedErrorMessage = "Invalid data provided.";
+                }
+                return BadRequest(ResponseModel<UserViewModel>.ErrorResult(combinedErrorMessage, 400));
             }
 
-            // Check if username or email already exists
-            if (_users.Any(u => u.Username == user.Username))
+            if (await _context.Users.AnyAsync(u => u.Email == createUserDto.Email))
             {
-                return BadRequest(ResponseModel<User>.ErrorResult("Tên đăng nhập đã tồn tại"));
+                return BadRequest(ResponseModel<UserViewModel>.ErrorResult("Email already exists."));
             }
 
-            if (_users.Any(u => u.Email == user.Email))
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == createUserDto.RoleName);
+            if (role == null)
             {
-                return BadRequest(ResponseModel<User>.ErrorResult("Email đã tồn tại"));
+                return BadRequest(ResponseModel<UserViewModel>.ErrorResult($"Role '{createUserDto.RoleName}' not found."));
             }
 
-            user.Id = _users.Max(u => u.Id) + 1;
-            user.CreatedDate = DateTime.Now;
-            _users.Add(user);
+            var newUser = new User
+            {
+                FullName = createUserDto.FullName,
+                Email = createUserDto.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password),
+                RoleID = role.RoleID,
+                CreatedAt = DateTime.UtcNow,
+                IsActive = createUserDto.IsActive ?? true
+            };
+
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            var userViewModel = new UserViewModel
+            {
+                UserID = newUser.UserID,
+                FullName = newUser.FullName,
+                Email = newUser.Email,
+                RoleName = role.RoleName,
+                RoleID = newUser.RoleID,
+                IsActive = newUser.IsActive,
+                CreatedAt = newUser.CreatedAt
+            };
 
             return CreatedAtAction(nameof(GetById),
-                new { id = user.Id },
-                ResponseModel<User>.SuccessResult(user, "Tạo người dùng thành công"));
+                new { id = newUser.UserID },
+                ResponseModel<UserViewModel>.SuccessResult(userViewModel, "User created successfully."));
         }
 
+        // PUT: api/User/5
         [HttpPut("{id}")]
-        public ActionResult<ResponseModel<User>> Update(int id, [FromBody] User user)
+        public async Task<ActionResult<ResponseModel<UserViewModel>>> Update(int id, [FromBody] UpdateUserDto updateUserDto)
         {
-            var existingUser = _users.FirstOrDefault(u => u.Id == id);
+            if (id != updateUserDto.UserID)
+            {
+                return BadRequest(ResponseModel<UserViewModel>.ErrorResult("User ID mismatch."));
+            }
+
+            var existingUser = await _context.Users.FindAsync(id);
+
             if (existingUser == null)
             {
-                return NotFound(ResponseModel<User>.ErrorResult("Không tìm thấy người dùng", 404));
+                return NotFound(ResponseModel<UserViewModel>.ErrorResult("User not found.", 404));
             }
 
-            existingUser.FullName = user.FullName;
-            existingUser.Email = user.Email;
-            existingUser.Phone = user.Phone;
-            existingUser.Role = user.Role;
-            existingUser.IsActive = user.IsActive;
+            if (!string.IsNullOrEmpty(updateUserDto.Email) && updateUserDto.Email != existingUser.Email)
+            {
+                if (await _context.Users.AnyAsync(u => u.Email == updateUserDto.Email && u.UserID != id))
+                {
+                    return BadRequest(ResponseModel<UserViewModel>.ErrorResult("New email already exists for another user."));
+                }
+                existingUser.Email = updateUserDto.Email;
+            }
 
-            return Ok(ResponseModel<User>.SuccessResult(existingUser, "Cập nhật người dùng thành công"));
+            if (!string.IsNullOrEmpty(updateUserDto.FullName))
+                existingUser.FullName = updateUserDto.FullName;
+
+            if (!string.IsNullOrEmpty(updateUserDto.RoleName))
+            {
+                var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == updateUserDto.RoleName);
+                if (role == null)
+                {
+                    return BadRequest(ResponseModel<UserViewModel>.ErrorResult($"Role '{updateUserDto.RoleName}' not found."));
+                }
+                existingUser.RoleID = role.RoleID;
+            }
+
+            if (updateUserDto.IsActive.HasValue)
+                existingUser.IsActive = updateUserDto.IsActive.Value;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound(ResponseModel<UserViewModel>.ErrorResult("User not found during update.", 404));
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            await _context.Entry(existingUser).Reference(u => u.UserRole).LoadAsync();
+
+            var updatedUserViewModel = new UserViewModel
+            {
+                UserID = existingUser.UserID,
+                FullName = existingUser.FullName,
+                Email = existingUser.Email,
+                RoleName = existingUser.UserRole?.RoleName ?? "N/A",
+                RoleID = existingUser.RoleID,
+                IsActive = existingUser.IsActive,
+                CreatedAt = existingUser.CreatedAt
+            };
+
+            return Ok(ResponseModel<UserViewModel>.SuccessResult(updatedUserViewModel, "User updated successfully."));
         }
 
+        // DELETE: api/User/5
         [HttpDelete("{id}")]
-        public ActionResult<ResponseModel<bool>> Delete(int id)
+        public async Task<ActionResult<ResponseModel<bool>>> Delete(int id)
         {
-            var user = _users.FirstOrDefault(u => u.Id == id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound(ResponseModel<bool>.ErrorResult("Không tìm thấy người dùng", 404));
+                return NotFound(ResponseModel<bool>.ErrorResult("User not found.", 404));
             }
 
-            _users.Remove(user);
-            return Ok(ResponseModel<bool>.SuccessResult(true, "Xóa người dùng thành công"));
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(ResponseModel<bool>.SuccessResult(true, "User deleted successfully."));
+        }
+
+        private bool UserExists(int id)
+        {
+            return _context.Users.Any(e => e.UserID == id);
         }
     }
 }
+// --- END OF FILE UserController.cs ---
