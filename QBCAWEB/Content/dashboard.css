@@ -1,0 +1,17 @@
+﻿* {
+    margin: ## 5. Tách CSS và JavaScript (Khuyến nghị) ### 5.1. Tạo file CSS Trong thư mục `Content`, tạo file `dashboard.css` và paste CSS vào đó. ### 5.2. Tạo file JavaScript Trong thư mục `Scripts`, tạo file `dashboard.js` và paste JavaScript vào đó. ### 5.3. Reference trong View ```html @
+
+{
+    ViewBag .Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/dashboard.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script> <script src="~/Scripts/dashboard.js"></script>
+}
+
+<!-- HTML content -->

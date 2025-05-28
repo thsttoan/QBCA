@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QBCAWEB - Trang chủ</title>
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>QBCAWEB</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="#home">Trang chủ</a>
+                <a href="#products">Sản phẩm</a>
+                <a href="#about">Giới thiệu</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Chào mừng đến với QBCAWEB</h2>
+                <p>Hệ thống quản lý web hiện đại và tiện lợi</p>
+                <button onclick="loadProducts()">Xem sản phẩm</button>
+            </div>
+        </section>
+
+        <section id="products" class="products">
+            <h2>Danh sách sản phẩm</h2>
+            <div id="product-list" class="product-grid">
+                <!-- Products will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 QBCAWEB. All rights reserved.</p>
+    </footer>
+
+    <script src="js/site.js"></script>
+</body>
+</html>

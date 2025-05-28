@@ -1,0 +1,869 @@
+﻿@{
+    Layout = null; 
+}
+@using System.Security.Claims
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QBCA - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+            .sidebar.collapsed {
+                width: 70px;
+            }
+
+                .sidebar.collapsed .sidebar-header .sidebar-logo,
+                .sidebar.collapsed .sidebar-menu li a .menu-text {
+                    display: none;
+                }
+
+                .sidebar.collapsed .sidebar-header .sidebar-logo-abbr {
+                    display: inline;
+                }
+
+                .sidebar.collapsed .sidebar-menu li a {
+                    justify-content: center;
+                }
+
+                    .sidebar.collapsed .sidebar-menu li a .menu-icon {
+                        margin-right: 0;
+                    }
+
+                .sidebar.collapsed .sidebar-toggle {
+                    justify-content: center;
+                }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 0 15px;
+        }
+
+        .sidebar-logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #3498db;
+            display: inline;
+        }
+
+        .sidebar-logo-abbr {
+            font-size: 28px;
+            font-weight: bold;
+            color: #3498db;
+            display: none;
+        }
+
+        .sidebar-menu {
+            list-style-type: none;
+            padding: 0 15px;
+            margin: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+            .sidebar-menu li a {
+                color: #bdc3c7;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                padding: 13px 15px;
+                border-radius: 6px;
+                margin-bottom: 8px;
+                transition: background-color 0.2s, color 0.2s;
+                white-space: nowrap;
+            }
+
+                .sidebar-menu li a:hover, .sidebar-menu li a.active {
+                    background-color: #34495e;
+                    color: #fff;
+                }
+
+                .sidebar-menu li a .menu-icon {
+                    font-size: 18px;
+                    margin-right: 15px;
+                    width: 20px;
+                    text-align: center;
+                }
+
+        .sidebar-toggle-container {
+            padding: 15px;
+            border-top: 1px solid #3a5368;
+        }
+
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+            border-radius: 5px;
+        }
+
+            .sidebar-toggle:hover {
+                background-color: #34495e;
+                color: #fff;
+            }
+
+            .sidebar-toggle .menu-text {
+                margin-left: 10px;
+            }
+
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-header {
+            background-color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header-left .app-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .header-left .university-name {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification-bell {
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .user-info .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+        }
+
+        .user-info .user-role {
+            font-size: 12px;
+            color: #7f8c8d;
+            display: block;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 6px;
+            list-style: none;
+            padding: 8px 0;
+            margin: 0;
+            width: 200px;
+            z-index: 1000;
+            border: 1px solid #eee;
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        .user-dropdown li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+            .user-dropdown li a i {
+                margin-right: 10px;
+                color: #7f8c8d;
+                width: 16px;
+            }
+
+            .user-dropdown li a:hover {
+                background-color: #f0f2f5;
+            }
+
+        .user-dropdown .dropdown-divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 8px 0;
+        }
+
+        .dashboard-container {
+            padding: 25px 30px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+            .welcome-banner h1 {
+                margin: 0 0 8px 0;
+                font-size: 26px;
+                font-weight: 600;
+            }
+
+            .welcome-banner p {
+                margin: 0;
+                font-size: 15px;
+                opacity: 0.9;
+            }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            padding: 20px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .dashboard-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .dashboard-card .card-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 18px;
+            }
+
+            .dashboard-card .card-icon {
+                font-size: 22px;
+                color: #3498db;
+                margin-right: 12px;
+                width: 30px;
+                text-align: center;
+            }
+
+            .dashboard-card .card-title {
+                font-size: 17px;
+                font-weight: 600;
+                margin: 0;
+                color: #3c4858;
+            }
+
+            .dashboard-card .card-content .main-stat {
+                font-size: 30px;
+                font-weight: 700;
+                margin: 0 0 5px 0;
+                color: #3498db;
+            }
+
+            .dashboard-card .card-content .sub-text {
+                font-size: 13px;
+                color: #7f8c8d;
+            }
+
+            .dashboard-card .card-link {
+                display: inline-block;
+                text-align: right;
+                font-size: 14px;
+                color: #3498db;
+                text-decoration: none;
+                margin-top: 18px;
+                font-weight: 600;
+            }
+
+                .dashboard-card .card-link:hover {
+                    text-decoration: underline;
+                }
+
+            .dashboard-card .card-description {
+                font-size: 14px;
+                color: #555;
+                line-height: 1.5;
+                margin-bottom: 15px;
+            }
+
+        .action-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+            .action-button:hover {
+                background-color: #2980b9;
+            }
+
+            .action-button i {
+                margin-right: 8px;
+            }
+
+        .task-list ul, .notification-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task-list li, .notification-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .task-list li:last-child, .notification-list li:last-child {
+                border-bottom: none;
+            }
+
+        .task-list .task-info, .notification-list .notification-info {
+            flex-grow: 1;
+        }
+
+        .task-list .task-title, .notification-list .notification-title {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+            color: #454f5b;
+        }
+
+        .task-list .task-meta, .notification-list .notification-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .notification-list .new-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quick-action-btn {
+            background-color: #f8f9fa;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            text-align: center;
+            padding: 15px 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+        }
+
+            .quick-action-btn:hover {
+                background-color: #e9ecef;
+                border-color: #ced4da;
+            }
+
+            .quick-action-btn i {
+                display: block;
+                font-size: 26px;
+                margin-bottom: 10px;
+                color: #3498db;
+            }
+    </style>
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo">QBCA</span>
+            <span class="sidebar-logo-abbr">Q</span>
+        </div>
+        <ul class="sidebar-menu" id="sidebarMenu">
+
+        </ul>
+        <div class="sidebar-toggle-container">
+            <button class="sidebar-toggle" onclick="toggleSidebar()" id="sidebarToggleBtn">
+                <i class="fas fa-chevron-left"></i> <span class="menu-text">Collapse</span>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <h2 class="app-name">Question Bank Checking Application</h2>
+                <p class="university-name">UTH University - R&D Department</p>
+            </div>
+            <div class="header-right">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationCount">0</span>
+                </div>
+                <div class="user-menu">
+                    <div class="user-profile">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <div class="user-info">
+                            <span class="user-name" id="profileUserName">User</span>
+                            <span class="user-role" id="profileUserRole">Role</span>
+                        </div>
+                    </div>
+                    <ul class="user-dropdown">
+                        <li><a href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+                        <li><a href="#"><i class="fas fa-key"></i> Change Password</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="@Url.Action("Logout", "Auth")"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-container" id="dashboardContent">
+            
+            <p>Loading dashboard...</p>
+        </main>
+    </div>
+
+    <script>
+        // --- Configuration data for each role ---
+        const userRolesConfig = {
+            "rd-staff": {
+                name: "R&D Staff",
+                avatarInitials: "RD",
+                sidebarMenu: [
+                    { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
+                    { name: "Subject Management", icon: "fas fa-book", link: "@Url.Action("Index", "Subjects")" },
+                    { name: "Question Bank", icon: "fas fa-database", link: "#/questions" },
+                    { name: "Duplication Check", icon: "fas fa-search-plus", link: "#/duplicates" },
+                    { name: "Plans & Distribution", icon: "fas fa-tasks", link: "#/plans" },
+                    { name: "Exam Management", icon: "fas fa-file-alt", link: "#/exams" },
+                    { name: "Reports", icon: "fas fa-chart-bar", link: "#/reports" },
+                    { name: "Settings", icon: "fas fa-cog", link: "#/settings" }
+                ],
+                dashboardHtml: `
+                    <div class="welcome-banner">
+                        <h1 id="welcomeName">Welcome back!</h1>
+                        <p>Efficiently manage subjects, question banks, and duplication processes.</p>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-book card-icon"></i><h3 class="card-title">Subject Management</h3></div>
+                            <div class="card-content"><p class="main-stat" id="totalSubjects">0</p><span class="sub-text">Total Subjects</span></div>
+                            <div class="quick-actions-grid">
+                               <a href="@Url.Action("Create", "Subjects")" class="quick-action-btn"><i class="fas fa-plus-circle"></i>Create Subject</a>
+                               <a href="@Url.Action("Index", "Subjects")" class="quick-action-btn"><i class="fas fa-list-alt"></i>View Subjects</a>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-tasks card-icon"></i><h3 class="card-title">Question Plans</h3></div>
+                            <div class="card-content"><p class="main-stat" id="activePlans">0</p><span class="sub-text">Active Plans</span></div>
+                             <div class="quick-actions-grid">
+                               <a href="#/plans/assign" class="quick-action-btn"><i class="fas fa-calendar-check"></i>Assign Plan</a>
+                               <a href="#/plans" class="quick-action-btn"><i class="fas fa-eye"></i>View Plans</a>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                             <div class="card-header"><i class="fas fa-search-plus card-icon"></i><h3 class="card-title">Duplicate Detections</h3></div>
+                            <div class="card-content"><p class="main-stat" id="pendingReviews">0</p><span class="sub-text">Pending Reviews</span></div>
+                            <a href="#/duplicates/review" class="card-link">Review Duplicates →</a>
+                        </div>
+                         <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-file-export card-icon"></i><h3 class="card-title">Exam Operations</h3></div>
+                            <div class="card-description">Create submission tables, export exams, and manage related steps.</div>
+                            <div class="quick-actions-grid">
+                               <a href="#/exams/create-submission" class="quick-action-btn"><i class="fas fa-table"></i>Create Submission Table</a>
+                               <a href="#/exams/export" class="quick-action-btn"><i class="fas fa-file-pdf"></i>Export Exam</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card" style="margin-top:25px;">
+                        <div class="card-header"><i class="far fa-bell card-icon"></i><h3 class="card-title">Recent System Notifications</h3></div>
+                        <div class="notification-list" id="rdNotifications">
+                            <ul><li><span class="notification-info"><span class="notification-title">No new notifications.</span></span></li></ul>
+                        </div>
+                    </div>
+                `
+            },
+            "lecturer": {
+                name: "Lecturer",
+                avatarInitials: "LE",
+                sidebarMenu: [
+                    { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
+                    { name: "My Tasks", icon: "fas fa-clipboard-list", link: "#/tasks" },
+                    { name: "Upload Questions", icon: "fas fa-upload", link: "#/upload" },
+                    { name: "Check Duplicates", icon: "fas fa-copy", link: "#/check-duplicates" },
+                    { name: "Mock Exams", icon: "fas fa-file-signature", link: "#/mock-exams" }
+                ],
+                dashboardHtml: `
+                    <div class="welcome-banner">
+                        <h1 id="welcomeName">Welcome!</h1>
+                        <p>Here are your current tasks and quick actions.</p>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-clipboard-list card-icon"></i><h3 class="card-title">Assigned Tasks</h3></div>
+                            <div class="card-content"><p class="main-stat" id="pendingTasks">0</p><span class="sub-text">Pending Tasks</span></div>
+                            <a href="#/tasks" class="card-link">View All Tasks →</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-upload card-icon"></i><h3 class="card-title">Upload Questions</h3></div>
+                            <p class="card-description">Contribute new questions to the question bank.</p>
+                            <a href="#/upload" class="action-button" style="margin-top:10px;"><i class="fas fa-plus"></i>Upload Now</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-copy card-icon"></i><h3 class="card-title">Check for Duplicates</h3></div>
+                            <p class="card-description">Review and manage duplicate questions for assigned subjects.</p>
+                            <a href="#/check-duplicates" class="action-button" style="margin-top:10px;"><i class="fas fa-search"></i>Start Checking</a>
+                        </div>
+                    </div>
+                     <div class="dashboard-card" style="margin-top:25px;">
+                        <div class="card-header"><i class="far fa-bell card-icon"></i><h3 class="card-title">Notifications</h3></div>
+                        <div class="notification-list" id="lecturerNotifications">
+                             <ul><li><span class="notification-info"><span class="notification-title">No new notifications.</span></span></li></ul>
+                        </div>
+                    </div>
+                `
+            },
+            "head-dept": {
+                name: "Head of Department",
+                avatarInitials: "HD",
+                sidebarMenu: [
+                    { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
+                    { name: "Overview", icon: "fas fa-chart-pie", link: "#/overview" },
+                    { name: "Assign Plans", icon: "fas fa-calendar-plus", link: "#/assign-plans" },
+                    { name: "Delegate Tasks", icon: "fas fa-users-cog", link: "#/delegate" },
+                    { name: "Approvals", icon: "fas fa-check-double", link: "#/approvals" },
+                    { name: "Reports", icon: "fas fa-chart-line", link: "#/reports" }
+                ],
+                dashboardHtml: `
+                    <div class="welcome-banner">
+                        <h1 id="welcomeName">Welcome!</h1>
+                        <p>Oversee progress, assign plans, and manage approvals.</p>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-check-double card-icon"></i><h3 class="card-title">Pending Approvals</h3></div>
+                            <div class="card-content"><p class="main-stat" id="pendingApprovals">0</p><span class="sub-text">Submission Tables</span></div>
+                            <a href="#/approvals" class="card-link">Review Approvals →</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-calendar-plus card-icon"></i><h3 class="card-title">Assign Question Plans</h3></div>
+                             <p class="card-description">Allocate question numbers and plans to subjects.</p>
+                            <a href="#/assign-plans" class="action-button" style="margin-top:10px;"><i class="fas fa-share-square"></i>Assign Now</a>
+                        </div>
+                         <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-users-cog card-icon"></i><h3 class="card-title">Delegate Tasks</h3></div>
+                             <p class="card-description">Assign tasks to Subject Leaders or Lecturers.</p>
+                            <a href="#/delegate" class="action-button" style="margin-top:10px;"><i class="fas fa-user-check"></i>Delegate Now</a>
+                        </div>
+                    </div>
+                     <div class="dashboard-card" style="margin-top:25px;">
+                        <div class="card-header"><i class="far fa-bell card-icon"></i><h3 class="card-title">Key Notifications</h3></div>
+                        <div class="notification-list" id="hodNotifications">
+                            <ul><li><span class="notification-info"><span class="notification-title">No new notifications.</span></span></li></ul>
+                        </div>
+                    </div>
+                `
+            },
+            "subject-leader": {
+                name: "Subject Leader",
+                avatarInitials: "SL",
+                sidebarMenu: [
+                    { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
+                    { name: "My Subjects", icon: "fas fa-chalkboard-teacher", link: "#/my-subjects" },
+                    { name: "Assign Tasks (Lecturers)", icon: "fas fa-user-plus", link: "#/assign-lecturer-tasks" },
+                    { name: "Review Questions", icon: "fas fa-edit", link: "#/review-questions" },
+                    { name: "Submit Exams", icon: "fas fa-file-import", link: "#/submit-exams" },
+                    { name: "Approve Lists", icon: "fas fa-clipboard-check", link: "#/approve-lists" }
+                ],
+                dashboardHtml: `
+                    <div class="welcome-banner">
+                        <h1 id="welcomeName">Welcome!</h1>
+                        <p>Manage your subjects, assign tasks, and review submissions.</p>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-edit card-icon"></i><h3 class="card-title">Questions for Review</h3></div>
+                            <div class="card-content"><p class="main-stat" id="questionsForReview">0</p><span class="sub-text">Uploaded by Lecturers</span></div>
+                            <a href="#/review-questions" class="card-link">Start Reviewing →</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-user-plus card-icon"></i><h3 class="card-title">Assign Tasks to Lecturers</h3></div>
+                            <p class="card-description">Delegate question review or editing tasks.</p>
+                            <a href="#/assign-lecturer-tasks" class="action-button" style="margin-top:10px;"><i class="fas fa-angle-double-right"></i>Assign Now</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header"><i class="fas fa-exclamation-triangle card-icon" style="color:#e74c3c;"></i><h3 class="card-title">Duplicate Question Alerts</h3></div>
+                            <div class="card-content"><p class="main-stat" id="duplicateAlerts">0</p><span class="sub-text">Require Attention</span></div>
+                             <a href="#/duplicates/alerts" class="card-link">View Alerts →</a>
+                        </div>
+                    </div>
+                    <div class="dashboard-card" style="margin-top:25px;">
+                        <div class="card-header"><i class="far fa-bell card-icon"></i><h3 class="card-title">Subject Notifications</h3></div>
+                        <div class="notification-list" id="slNotifications">
+                            <ul><li><span class="notification-info"><span class="notification-title">No new notifications.</span></span></li></ul>
+                        </div>
+                    </div>
+                `
+            }
+            
+        };
+
+        // --- Function to render UI based on role ---
+        function loadDashboardForRole(roleKey, userFullName) {
+            const roleData = userRolesConfig[roleKey];
+            const sidebarMenuEl = document.getElementById('sidebarMenu');
+            const dashboardContentEl = document.getElementById('dashboardContent');
+            const profileUserNameEl = document.getElementById('profileUserName');
+            const profileUserRoleEl = document.getElementById('profileUserRole');
+            const userAvatarEl = document.getElementById('userAvatar');
+            const welcomeNameElSelector = '#welcomeName';
+
+            if (!roleData) {
+                console.error("Role data not found for key:", roleKey);
+                dashboardContentEl.innerHTML = "<p style='color:red; text-align:center; margin-top: 20px;'>Error: User role configuration not found.</p>";
+                profileUserNameEl.textContent = "Unknown User";
+                profileUserRoleEl.textContent = "Unknown Role";
+                userAvatarEl.textContent = "?";
+                sidebarMenuEl.innerHTML = '<li><a href="#" class="active"><i class="fas fa-tachometer-alt menu-icon"></i> <span class="menu-text">Dashboard</span></a></li>';
+                return;
+            }
+
+            // Update User Profile in Header
+            profileUserNameEl.textContent = userFullName || roleData.name;
+            profileUserRoleEl.textContent = roleData.name;
+
+            const nameParts = (userFullName || roleData.name).split(' ');
+            let initials = nameParts[0] ? nameParts[0][0] : '';
+            if (nameParts.length > 1 && nameParts[nameParts.length - 1]) {
+                initials += nameParts[nameParts.length - 1][0];
+            } else if (initials.length === 1 && (userFullName || roleData.name).length > 1) {
+                initials += (userFullName || roleData.name)[1] || '';
+            }
+            userAvatarEl.textContent = initials.toUpperCase() || roleData.avatarInitials;
+
+
+            // Create Sidebar Menu
+            sidebarMenuEl.innerHTML = '';
+            roleData.sidebarMenu.forEach(item => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = item.link;
+                if (item.active) a.classList.add('active');
+                a.innerHTML = `<i class="${item.icon} menu-icon"></i> <span class="menu-text">${item.name}</span>`;
+                li.appendChild(a);
+                sidebarMenuEl.appendChild(li);
+            });
+
+            // Display Dashboard Content
+            dashboardContentEl.innerHTML = roleData.dashboardHtml;
+            const welcomeNameElement = dashboardContentEl.querySelector(welcomeNameElSelector);
+            if (welcomeNameElement) {
+                welcomeNameElement.textContent = `Welcome back, ${userFullName || roleData.name}!`;
+            }
+
+            updateDynamicStats(roleKey);
+            updateNotifications(roleKey);
+        }
+
+        // --- Function to toggle Sidebar ---
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggleBtn');
+            const icon = toggleBtn.querySelector('i');
+            const text = toggleBtn.querySelector('.menu-text');
+
+            sidebar.classList.toggle('collapsed');
+            if (sidebar.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-left');
+                icon.classList.add('fa-chevron-right');
+                if(text) text.textContent = "Expand";
+            } else {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-left');
+                if(text) text.textContent = "Collapse";
+            }
+        }
+
+        // --- Function to update dynamic stats (placeholder) ---
+        function updateDynamicStats(roleKey) {
+            if (roleKey === "rd-staff") {
+                document.getElementById('totalSubjects') && (document.getElementById('totalSubjects').textContent = '12');
+                document.getElementById('activePlans') && (document.getElementById('activePlans').textContent = '4');
+                document.getElementById('pendingReviews') && (document.getElementById('pendingReviews').textContent = '7');
+            } else if (roleKey === "lecturer") {
+                document.getElementById('pendingTasks') && (document.getElementById('pendingTasks').textContent = '2');
+            } else if (roleKey === "head-dept") {
+                document.getElementById('pendingApprovals') && (document.getElementById('pendingApprovals').textContent = '1');
+            } else if (roleKey === "subject-leader") {
+                document.getElementById('questionsForReview') && (document.getElementById('questionsForReview').textContent = '18');
+                document.getElementById('duplicateAlerts') && (document.getElementById('duplicateAlerts').textContent = '3');
+            }
+        }
+
+        // --- Function to update notifications (placeholder) ---
+        function updateNotifications(roleKey) {
+            let notificationHtml = '<ul><li><span class="notification-info"><span class="notification-title" style="color:#888">No new notifications.</span></span></li></ul>';
+            let count = 0;
+
+            if (roleKey === "rd-staff") {
+                count = 2;
+                notificationHtml = `
+                    <ul>
+                        <li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">System algorithm updated for checking.</span><span class="notification-meta">15 mins ago</span></span></li>
+                        <li><span class="notification-info"><span class="notification-title">Exam "Calculus Final" has been approved.</span><span class="notification-meta">2 hours ago</span></span></li>
+                    </ul>`;
+                document.getElementById('rdNotifications') && (document.getElementById('rdNotifications').innerHTML = notificationHtml);
+            } else if (roleKey === "lecturer") {
+                count = 1;
+                notificationHtml = `
+                    <ul>
+                        <li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">New Task: Prepare 10 questions for "AI" subject.</span><span class="notification-meta">Just now</span></span></li>
+                    </ul>`;
+                document.getElementById('lecturerNotifications') && (document.getElementById('lecturerNotifications').innerHTML = notificationHtml);
+            }
+            // Add more for other roles
+            document.getElementById('notificationCount').textContent = count;
+        }
+
+
+        // --- Run when the page is loaded ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const serverUserRole = '@User.FindFirst(ClaimTypes.Role)?.Value';
+            const serverUserFullName = '@User.FindFirst("FullName")?.Value';
+
+            const currentUserRole = serverUserRole || "lecturer";
+            const currentUserFullName = serverUserFullName || userRolesConfig[currentUserRole]?.name || "User";
+
+            if (userRolesConfig[currentUserRole]) {
+                loadDashboardForRole(currentUserRole, currentUserFullName);
+            } else {
+                console.error("User role is invalid or not found from server: ", currentUserRole);
+                loadDashboardForRole('lecturer', 'Default Lecturer');
+            }
+
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggleBtn');
+            const icon = toggleBtn.querySelector('i');
+            const text = toggleBtn.querySelector('.menu-text');
+             if (sidebar.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-left');
+                icon.classList.add('fa-chevron-right');
+                if(text) text.textContent = "Expand";
+            } else {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-left');
+                if(text) text.textContent = "Collapse";
+            }
+        });
+
+    </script>
+</body>
+</html>
