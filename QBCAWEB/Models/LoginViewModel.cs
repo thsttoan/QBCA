@@ -4,13 +4,13 @@ namespace QBCAWEB.Models
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
+        [Required(ErrorMessage = "Please enter username")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        [Required(ErrorMessage = "Please enter password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn vai trò.")]
+        [Required(ErrorMessage = "Please select role")]
         public string SelectedRole { get; set; }
 
         public bool RememberMe { get; set; }

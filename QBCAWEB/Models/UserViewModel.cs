@@ -1,5 +1,4 @@
 ﻿using System;
-// using System.ComponentModel.DataAnnotations; // Không cần thiết ở đây nếu không có validation attributes
 
 namespace QBCAWEB.Models
 {

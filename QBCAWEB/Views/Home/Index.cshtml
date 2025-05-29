@@ -195,26 +195,26 @@
             padding: 2px 5px;
             border-radius: 50%;
             font-weight: bold;
-            display: none; /* Initially hidden, shown by JS if count > 0 */
+            display: none;
         }
 
         .notification-dropdown {
-            display: none; /* Hidden by default */
+            display: none;
             position: absolute;
-            top: calc(100% + 15px); /* Position below the bell */
-            right: -20px; /* Adjust as needed */
+            top: calc(100% + 15px);
+            right: -20px;
             width: 360px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-            z-index: 1001; /* Ensure it's above other content */
+            z-index: 1001;
             border: 1px solid #e0e0e0;
-            max-height: 400px; /* Allow scrolling for many notifications */
+            max-height: 400px;
             overflow-y: auto;
         }
 
             .notification-dropdown.active {
-                display: block; /* Shown when active class is added */
+                display: block;
             }
 
 
@@ -228,17 +228,6 @@
             font-size: 15px;
             color: #333;
         }
-
-            .notification-dropdown-header .view-all-notifications-link { /* This class was in original, can be removed or reused if needed */
-                font-size: 13px;
-                color: #007bff;
-                text-decoration: none;
-                font-weight: normal;
-            }
-
-                .notification-dropdown-header .view-all-notifications-link:hover {
-                    text-decoration: underline;
-                }
 
         .notification-dropdown-list {
             list-style: none;
@@ -279,9 +268,9 @@
 
         .notification-item-icon {
             font-size: 16px;
-            color: #667eea; /* Or other appropriate color */
-            margin-top: 2px; /* Align with text better */
-            width: 20px; /* Ensure consistent width */
+            color: #667eea;
+            margin-top: 2px;
+            width: 20px;
             text-align: center;
         }
 
@@ -318,11 +307,23 @@
                     text-decoration: underline;
                 }
 
+        /* --- User Menu Styles --- */
+        .user-menu {
+            position: relative;
+        }
+
         .user-profile {
             display: flex;
             align-items: center;
             cursor: pointer;
+            padding: 5px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
         }
+
+            .user-profile:hover {
+                background-color: #f0f2f5;
+            }
 
         .user-avatar {
             width: 38px;
@@ -351,10 +352,6 @@
             display: block;
         }
 
-        .user-menu {
-            position: relative;
-        }
-
         .user-dropdown {
             display: none;
             position: absolute;
@@ -371,41 +368,66 @@
             border: 1px solid #eee;
         }
 
-        .user-menu:hover .user-dropdown {
-            display: block;
-        }
-
-        .user-dropdown li a {
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
-            .user-dropdown li a i {
-                margin-right: 10px;
-                color: #7f8c8d;
-                width: 16px;
+            .user-dropdown.active {
+                display: block;
             }
 
-            .user-dropdown li a:hover {
-                background-color: #f0f2f5;
+            .user-dropdown li a {
+                display: flex;
+                align-items: center;
+                padding: 10px 15px;
+                text-decoration: none;
+                color: #333;
+                font-size: 14px;
+                white-space: nowrap;
             }
 
-        .user-dropdown .dropdown-divider {
-            height: 1px;
-            background-color: #eee;
-            margin: 8px 0;
-        }
+                .user-dropdown li a i {
+                    margin-right: 10px;
+                    color: #7f8c8d;
+                    width: 16px;
+                }
+
+                .user-dropdown li a:hover {
+                    background-color: #f0f2f5;
+                }
+
+            .user-dropdown .dropdown-divider {
+                height: 1px;
+                background-color: #eee;
+                margin: 8px 0;
+            }
+        /* --- End User Menu Styles --- */
+
 
         .dashboard-container {
             padding: 25px 30px;
             flex-grow: 1;
             overflow-y: auto;
         }
+
+        .feature-view-title-banner {
+            background: linear-gradient(135deg, #5b6a7d 0%, #495666 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+            .feature-view-title-banner h1 {
+                margin: 0;
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+        .feature-view-content {
+            background-color: #fff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
 
         .welcome-banner {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -482,7 +504,6 @@
 
             .dashboard-card .card-link {
                 display: inline-block;
-                text-align: right;
                 font-size: 14px;
                 color: #3498db;
                 text-decoration: none;
@@ -613,7 +634,7 @@
             <span class="sidebar-logo-abbr">Q</span>
         </div>
         <ul class="sidebar-menu" id="sidebarMenu">
-            <!-- Dynamically populated by JS -->
+            <!-- Sidebar items will be populated by JavaScript -->
         </ul>
         <div class="sidebar-toggle-container">
             <button class="sidebar-toggle" onclick="toggleSidebar()" id="sidebarToggleBtn">
@@ -637,10 +658,8 @@
                     <div class="notification-dropdown" id="notificationDropdownContentLayout">
                         <div class="notification-dropdown-header">
                             <span>Notifications</span>
-                            <!-- Optional: Add icons like checkmark or settings here if needed -->
                         </div>
                         <ul class="notification-dropdown-list" id="headerNotificationListLayout">
-                            <!-- Dynamically populated by JS -->
                             <li class="no-notifications">No new notifications.</li>
                         </ul>
                         <div class="notification-dropdown-footer">
@@ -648,15 +667,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="user-menu">
-                    <div class="user-profile">
+
+                <div class="user-menu" id="userMenuContainer">
+                    <div class="user-profile" id="userProfileTrigger">
                         <div class="user-avatar" id="userAvatar">U</div>
                         <div class="user-info">
                             <span class="user-name" id="profileUserName">User</span>
                             <span class="user-role" id="profileUserRole">Role</span>
                         </div>
                     </div>
-                    <ul class="user-dropdown">
+                    <ul class="user-dropdown" id="userDropdownContent">
                         <li><a href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
                         <li><a href="#"><i class="fas fa-key"></i> Change Password</a></li>
                         <li class="dropdown-divider"></li>
@@ -672,7 +692,9 @@
     </div>
 
     <script>
-        // --- Configuration data for each role ---
+        let currentAppUserRole = '';
+        let currentAppUserFullName = '';
+
         const userRolesConfig = {
             "rd-staff": {
                 name: "R&D Staff",
@@ -680,12 +702,12 @@
                 sidebarMenu: [
                     { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
                     { name: "Subject Management", icon: "fas fa-book", link: "@Url.Action("Index", "Subjects")" },
-                    { name: "Question Bank", icon: "fas fa-database", link: "#/questions" },
-                    { name: "Duplication Check", icon: "fas fa-search-plus", link: "#/duplicates" },
-                    { name: "Plans & Distribution", icon: "fas fa-tasks", link: "#/plans" },
-                    { name: "Exam Management", icon: "fas fa-file-alt", link: "#/exams" },
-                    { name: "Reports", icon: "fas fa-chart-bar", link: "#/reports" },
-                    { name: "Settings", icon: "fas fa-cog", link: "#/settings" }
+                    { name: "Question Bank", icon: "fas fa-database", link: "#questions" },
+                    { name: "Duplication Check", icon: "fas fa-search-plus", link: "#duplicates" },
+                    { name: "Plans & Distribution", icon: "fas fa-tasks", link: "#plans" },
+                    { name: "Exam Management", icon: "fas fa-file-alt", link: "#exams" },
+                    { name: "Reports", icon: "fas fa-chart-bar", link: "#reports-rd" },
+                    { name: "Settings", icon: "fas fa-cog", link: "#settings" }
                 ],
                 dashboardHtml: `
                     <div class="welcome-banner">
@@ -705,21 +727,21 @@
                             <div class="card-header"><i class="fas fa-tasks card-icon"></i><h3 class="card-title">Question Plans</h3></div>
                             <div class="card-content"><p class="main-stat" id="activePlans">0</p><span class="sub-text">Active Plans</span></div>
                              <div class="quick-actions-grid">
-                               <a href="#/plans/assign" class="quick-action-btn"><i class="fas fa-calendar-check"></i>Assign Plan</a>
-                               <a href="#/plans" class="quick-action-btn"><i class="fas fa-eye"></i>View Plans</a>
+                               <a href="#plans/assign" class="quick-action-btn"><i class="fas fa-calendar-check"></i>Assign Plan</a>
+                               <a href="#plans" class="quick-action-btn"><i class="fas fa-eye"></i>View Plans</a>
                             </div>
                         </div>
                         <div class="dashboard-card">
                              <div class="card-header"><i class="fas fa-search-plus card-icon"></i><h3 class="card-title">Duplicate Detections</h3></div>
                             <div class="card-content"><p class="main-stat" id="pendingReviews">0</p><span class="sub-text">Pending Reviews</span></div>
-                            <a href="#/duplicates/review" class="card-link">Review Duplicates →</a>
+                            <a href="#duplicates/review" class="card-link">Review Duplicates →</a>
                         </div>
                          <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-file-export card-icon"></i><h3 class="card-title">Exam Operations</h3></div>
                             <div class="card-description">Create submission tables, export exams, and manage related steps.</div>
                             <div class="quick-actions-grid">
-                               <a href="#/exams/create-submission" class="quick-action-btn"><i class="fas fa-table"></i>Create Submission Table</a>
-                               <a href="#/exams/export" class="quick-action-btn"><i class="fas fa-file-pdf"></i>Export Exam</a>
+                               <a href="#exams/create-submission" class="quick-action-btn"><i class="fas fa-table"></i>Create Submission Table</a>
+                               <a href="#exams/export" class="quick-action-btn"><i class="fas fa-file-pdf"></i>Export Exam</a>
                             </div>
                         </div>
                     </div>
@@ -736,10 +758,10 @@
                 avatarInitials: "LE",
                 sidebarMenu: [
                     { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
-                    { name: "My Tasks", icon: "fas fa-clipboard-list", link: "#/tasks" },
-                    { name: "Upload Questions", icon: "fas fa-upload", link: "#/upload" },
-                    { name: "Check Duplicates", icon: "fas fa-copy", link: "#/check-duplicates" },
-                    { name: "Mock Exams", icon: "fas fa-file-signature", link: "#/mock-exams" }
+                    { name: "My Tasks", icon: "fas fa-clipboard-list", link: "#tasks" },
+                    { name: "Upload Questions", icon: "fas fa-upload", link: "#upload" },
+                    { name: "Check Duplicates", icon: "fas fa-copy", link: "#check-duplicates" },
+                    { name: "Mock Exams", icon: "fas fa-file-signature", link: "#mock-exams" }
                 ],
                 dashboardHtml: `
                     <div class="welcome-banner">
@@ -750,17 +772,17 @@
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-clipboard-list card-icon"></i><h3 class="card-title">Assigned Tasks</h3></div>
                             <div class="card-content"><p class="main-stat" id="pendingTasks">0</p><span class="sub-text">Pending Tasks</span></div>
-                            <a href="#/tasks" class="card-link">View All Tasks →</a>
+                            <a href="#tasks" class="card-link">View All Tasks →</a>
                         </div>
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-upload card-icon"></i><h3 class="card-title">Upload Questions</h3></div>
                             <p class="card-description">Contribute new questions to the question bank.</p>
-                            <a href="#/upload" class="action-button" style="margin-top:10px;"><i class="fas fa-plus"></i>Upload Now</a>
+                            <a href="#upload" class="action-button" style="margin-top:10px;"><i class="fas fa-plus"></i>Upload Now</a>
                         </div>
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-copy card-icon"></i><h3 class="card-title">Check for Duplicates</h3></div>
                             <p class="card-description">Review and manage duplicate questions for assigned subjects.</p>
-                            <a href="#/check-duplicates" class="action-button" style="margin-top:10px;"><i class="fas fa-search"></i>Start Checking</a>
+                            <a href="#check-duplicates" class="action-button" style="margin-top:10px;"><i class="fas fa-search"></i>Start Checking</a>
                         </div>
                     </div>
                      <div class="dashboard-card" style="margin-top:25px;">
@@ -776,11 +798,11 @@
                 avatarInitials: "HD",
                 sidebarMenu: [
                     { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
-                    { name: "Overview", icon: "fas fa-chart-pie", link: "#/overview" },
-                    { name: "Assign Plans", icon: "fas fa-calendar-plus", link: "#/assign-plans" },
-                    { name: "Delegate Tasks", icon: "fas fa-users-cog", link: "#/delegate" },
-                    { name: "Approvals", icon: "fas fa-check-double", link: "#/approvals" },
-                    { name: "Reports", icon: "fas fa-chart-line", link: "#/reports" }
+                    { name: "Overview", icon: "fas fa-chart-pie", link: "#overview" },
+                    { name: "Assign Plans", icon: "fas fa-calendar-plus", link: "#assign-plans" },
+                    { name: "Delegate Tasks", icon: "fas fa-users-cog", link: "#delegate" },
+                    { name: "Approvals", icon: "fas fa-check-double", link: "#approvals" },
+                    { name: "Reports", icon: "fas fa-chart-line", link: "#reports-hd" }
                 ],
                 dashboardHtml: `
                     <div class="welcome-banner">
@@ -791,17 +813,17 @@
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-check-double card-icon"></i><h3 class="card-title">Pending Approvals</h3></div>
                             <div class="card-content"><p class="main-stat" id="pendingApprovals">0</p><span class="sub-text">Submission Tables</span></div>
-                            <a href="#/approvals" class="card-link">Review Approvals →</a>
+                            <a href="#approvals" class="card-link">Review Approvals →</a>
                         </div>
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-calendar-plus card-icon"></i><h3 class="card-title">Assign Question Plans</h3></div>
                              <p class="card-description">Allocate question numbers and plans to subjects.</p>
-                            <a href="#/assign-plans" class="action-button" style="margin-top:10px;"><i class="fas fa-share-square"></i>Assign Now</a>
+                            <a href="#assign-plans" class="action-button" style="margin-top:10px;"><i class="fas fa-share-square"></i>Assign Now</a>
                         </div>
                          <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-users-cog card-icon"></i><h3 class="card-title">Delegate Tasks</h3></div>
                              <p class="card-description">Assign tasks to Subject Leaders or Lecturers.</p>
-                            <a href="#/delegate" class="action-button" style="margin-top:10px;"><i class="fas fa-user-check"></i>Delegate Now</a>
+                            <a href="#delegate" class="action-button" style="margin-top:10px;"><i class="fas fa-user-check"></i>Delegate Now</a>
                         </div>
                     </div>
                      <div class="dashboard-card" style="margin-top:25px;">
@@ -817,32 +839,32 @@
                 avatarInitials: "SL",
                 sidebarMenu: [
                     { name: "Dashboard", icon: "fas fa-tachometer-alt", link: "#", active: true },
-                    { name: "My Subjects", icon: "fas fa-chalkboard-teacher", link: "#/my-subjects" },
-                    { name: "Assign Tasks (Lecturers)", icon: "fas fa-user-plus", link: "#/assign-lecturer-tasks" },
-                    { name: "Review Questions", icon: "fas fa-edit", link: "#/review-questions" },
-                    { name: "Submit Exams", icon: "fas fa-file-import", link: "#/submit-exams" },
-                    { name: "Approve Lists", icon: "fas fa-clipboard-check", link: "#/approve-lists" }
+                    { name: "My Subjects", icon: "fas fa-chalkboard-teacher", link: "#my-subjects" },
+                    { name: "Assign Tasks (Lecturers)", icon: "fas fa-user-plus", link: "#assign-lecturer-tasks" },
+                    { name: "Review Questions", icon: "fas fa-edit", link: "#review-questions" },
+                    { name: "Submit Exams", icon: "fas fa-file-import", link: "#submit-exams" },
+                    { name: "Approve Lists", icon: "fas fa-clipboard-check", link: "#approve-lists" }
                 ],
                 dashboardHtml: `
                     <div class="welcome-banner">
-                        <h1 id="welcomeName">Welcome!</h1>
+                        <h1 id="welcomeName">Welcome back!</h1>
                         <p>Manage your subjects, assign tasks, and review submissions.</p>
                     </div>
                     <div class="dashboard-grid">
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-edit card-icon"></i><h3 class="card-title">Questions for Review</h3></div>
                             <div class="card-content"><p class="main-stat" id="questionsForReview">0</p><span class="sub-text">Uploaded by Lecturers</span></div>
-                            <a href="#/review-questions" class="card-link">Start Reviewing →</a>
+                            <a href="#review-questions" class="card-link">Start Reviewing →</a>
                         </div>
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-user-plus card-icon"></i><h3 class="card-title">Assign Tasks to Lecturers</h3></div>
                             <p class="card-description">Delegate question review or editing tasks.</p>
-                            <a href="#/assign-lecturer-tasks" class="action-button" style="margin-top:10px;"><i class="fas fa-angle-double-right"></i>Assign Now</a>
+                            <a href="#assign-lecturer-tasks" class="action-button" style="margin-top:10px;"><i class="fas fa-angle-double-right"></i>Assign Now</a>
                         </div>
                         <div class="dashboard-card">
                             <div class="card-header"><i class="fas fa-exclamation-triangle card-icon" style="color:#e74c3c;"></i><h3 class="card-title">Duplicate Question Alerts</h3></div>
                             <div class="card-content"><p class="main-stat" id="duplicateAlerts">0</p><span class="sub-text">Require Attention</span></div>
-                             <a href="#/duplicates/alerts" class="card-link">View Alerts →</a>
+                             <a href="#duplicates/alerts" class="card-link">View Alerts →</a>
                         </div>
                     </div>
                     <div class="dashboard-card" style="margin-top:25px;">
@@ -853,38 +875,140 @@
                     </div>
                 `
             }
-
         };
 
-        // --- Function to render UI based on role ---
+        const featureViewsConfig = {
+            "my-subjects": {
+                title: "My Subjects",
+                html: `<div class="feature-view-content"><p>Subject Leader can view and manage their assigned subjects here. This includes details like subject code, name, assigned lecturers, question count, and overall progress.</p><p><em>(Placeholder for table/list of subjects)</em></p></div>`
+            },
+            "assign-lecturer-tasks": {
+                title: "Assign Tasks to Lecturers",
+                html: `<div class="feature-view-content"><p>Subject Leader can assign tasks such as question creation, review, or editing to lecturers for specific subjects.</p><p><em>(Placeholder for task assignment form: select subject, lecturer, task type, description, deadline)</em></p></div>`
+            },
+            "review-questions": {
+                title: "Review Questions",
+                html: `<div class="feature-view-content"><p>Subject Leader reviews questions submitted or flagged by lecturers. They can approve, reject with comments, or edit questions.</p><p><em>(Placeholder for question review interface: list of questions, preview, accept/reject buttons)</em></p></div>`
+            },
+            "submit-exams": {
+                title: "Submit Exams",
+                html: `<div class="feature-view-content"><p>Subject Leader compiles and submits finalized exam question sets for further processing or approval.</p><p><em>(Placeholder for exam submission form: select subject, exam name, add questions, submit)</em></p></div>`
+            },
+            "approve-lists": {
+                title: "Approve Question Lists",
+                html: `<div class="feature-view-content"><p>Subject Leader provides final approval for curated lists of questions before they are officially added to the bank or used in exams.</p><p><em>(Placeholder for list approval interface: list of question sets, details, approve/reject options)</em></p></div>`
+            },
+            "duplicates/alerts": {
+                title: "Duplicate Question Alerts",
+                html: `<div class="feature-view-content"><p>Displays alerts for potential duplicate questions identified by the system, requiring the Subject Leader's attention and resolution.</p><p><em>(Placeholder for duplicate alerts list: pairs of suspected duplicates, comparison view, resolution options)</em></p></div>`
+            },
+            "questions": {
+                title: "Question Bank Management",
+                html: `<div class="feature-view-content"><p>R&D Staff can view, search, and manage the entire question bank across all subjects. This includes advanced filtering and bulk operations.</p><p><em>(Placeholder for comprehensive question bank datatable, filters, import/export options)</em></p></div>`
+            },
+            "duplicates": {
+                title: "Duplication Check Overview",
+                html: `<div class="feature-view-content"><p>R&D Staff can initiate system-wide duplication checks, view duplication reports, and configure duplication detection parameters.</p><p><em>(Placeholder for duplication check dashboard, settings, history)</em></p></div>`
+            },
+            "duplicates/review": {
+                title: "Review Duplicate Detections",
+                html: `<div class="feature-view-content"><p>R&D Staff reviews flagged duplicate questions, possibly from different lecturer lists or across subjects, and takes necessary actions.</p><p><em>(Placeholder for detailed duplicate review interface for R&D Staff)</em></p></div>`
+            },
+            "plans": {
+                title: "Plans & Distribution Management",
+                html: `<div class="feature-view-content"><p>R&D Staff create and manage question contribution plans, define targets for subjects, and monitor progress.</p><p><em>(Placeholder for plan creation and tracking interface)</em></p></div>`
+            },
+            "plans/assign": {
+                title: "Assign Question Plan",
+                html: `<div class="feature-view-content"><p>R&D Staff assign specific question contribution plans and number of questions per subject.</p><p><em>(Placeholder for form to assign plans to subjects/subject leaders)</em></p></div>`
+            },
+            "exams": {
+                title: "Exam Management",
+                html: `<div class="feature-view-content"><p>R&D Staff oversee the exam creation process, manage exam versions, and coordinate final exam exports.</p><p><em>(Placeholder for exam lifecycle management, version control)</em></p></div>`
+            },
+            "exams/create-submission": {
+                title: "Create Exam Submission Table",
+                html: `<div class="feature-view-content"><p>R&D Staff create submission tables for exams, documenting the questions included and their sources.</p><p><em>(Placeholder for interface to generate exam submission tables)</em></p></div>`
+            },
+            "exams/export": {
+                title: "Export Exam",
+                html: `<div class="feature-view-content"><p>R&D Staff export finalized exams in various formats for review or printing.</p><p><em>(Placeholder for exam export options and generation)</em></p></div>`
+            },
+            "reports-rd": {
+                title: "R&D Reports",
+                html: `<div class="feature-view-content"><p>R&D Staff can generate various reports related to question bank health, duplication rates, contribution progress, and system usage.</p><p><em>(Placeholder for R&D specific reporting dashboard and report generation options)</em></p></div>`
+            },
+            "settings": {
+                title: "System Settings",
+                html: `<div class="feature-view-content"><p>R&D Staff can configure system-level settings, manage user roles (potentially), and define parameters for duplication checks and other modules.</p><p><em>(Placeholder for system configuration panel)</em></p></div>`
+            },
+            "tasks": {
+                title: "My Tasks",
+                html: `<div class="feature-view-content"><p>Lecturer can view all tasks assigned to them, such as creating new questions, reviewing questions, or checking for duplicates within their assigned subjects.</p><p><em>(Placeholder for list of tasks with status, deadlines, and links to complete them)</em></p></div>`
+            },
+            "upload": {
+                title: "Upload Questions",
+                html: `<div class="feature-view-content"><p>Lecturer uses this interface to upload new questions, providing question text, options, correct answer, difficulty level, and associated CLOs.</p><p><em>(Placeholder for question upload form with all necessary fields)</em></p></div>`
+            },
+            "check-duplicates": {
+                title: "Check Duplicates",
+                html: `<div class="feature-view-content"><p>Lecturer can check for duplicate questions within their assigned subjects or among a new batch of questions they are preparing.</p><p><em>(Placeholder for interface to submit questions for duplication check and view results)</em></p></div>`
+            },
+            "mock-exams": {
+                title: "Mock Exams",
+                html: `<div class="feature-view-content"><p>Lecturer can take mock exams or review exam drafts and provide feedback.</p><p><em>(Placeholder for mock exam interface and feedback submission)</em></p></div>`
+            },
+            "overview": {
+                title: "Department Overview",
+                html: `<div class="feature-view-content"><p>Head of Department gets a high-level overview of all activities, including question bank status, plan progress, pending approvals, and overall team performance.</p><p><em>(Placeholder for HOD dashboard with key metrics and summaries)</em></p></div>`
+            },
+            "assign-plans": {
+                title: "Assign Plans to Subjects/Leaders",
+                html: `<div class="feature-view-content"><p>Head of Department assigns overall question contribution plans to subjects or delegates plan management to Subject Leaders.</p><p><em>(Placeholder for plan assignment interface for HOD)</em></p></div>`
+            },
+            "delegate": {
+                title: "Delegate Tasks",
+                html: `<div class="feature-view-content"><p>Head of Department delegates high-level tasks or responsibilities to Subject Leaders or R&D Staff.</p><p><em>(Placeholder for task delegation interface for HOD)</em></p></div>`
+            },
+            "approvals": {
+                title: "Pending Approvals",
+                html: `<div class="feature-view-content"><p>Head of Department reviews and approves critical items, such as final exam submission tables or significant changes to the question bank structure.</p><p><em>(Placeholder for list of items awaiting HOD approval)</em></p></div>`
+            },
+            "reports-hd": {
+                title: "Department Reports",
+                html: `<div class="feature-view-content"><p>Head of Department can view consolidated reports on departmental performance, resource allocation, and achievement of targets related to the question bank.</p><p><em>(Placeholder for HOD specific reporting dashboard)</em></p></div>`
+            }
+        };
+
         function loadDashboardForRole(roleKey, userFullName) {
             const roleData = userRolesConfig[roleKey];
             const sidebarMenuEl = document.getElementById('sidebarMenu');
-            const dashboardContentEl = document.getElementById('dashboardContent');
             const profileUserNameEl = document.getElementById('profileUserName');
             const profileUserRoleEl = document.getElementById('profileUserRole');
             const userAvatarEl = document.getElementById('userAvatar');
-            const welcomeNameElSelector = '#welcomeName';
 
             if (!roleData) {
                 console.error("Role data not found for key:", roleKey);
-                dashboardContentEl.innerHTML = "<p style='color:red; text-align:center; margin-top: 20px;'>Error: User role configuration not found.</p>";
-                profileUserNameEl.textContent = "Unknown User";
-                profileUserRoleEl.textContent = "Unknown Role";
-                userAvatarEl.textContent = "?";
-                sidebarMenuEl.innerHTML = '<li><a href="#" class="active"><i class="fas fa-tachometer-alt menu-icon"></i> <span class="menu-text">Dashboard</span></a></li>';
+                document.getElementById('dashboardContent').innerHTML = "<p style='color:red; text-align:center; margin-top: 20px;'>Error: User role configuration not found.</p>";
+                if(profileUserNameEl) profileUserNameEl.textContent = "Unknown User";
+                if(profileUserRoleEl) profileUserRoleEl.textContent = "Unknown Role";
+                if(userAvatarEl) userAvatarEl.textContent = "?";
+                if(sidebarMenuEl) sidebarMenuEl.innerHTML = '<li><a href="#" class="active"><i class="fas fa-tachometer-alt menu-icon"></i> <span class="menu-text">Dashboard</span></a></li>';
                 return;
             }
 
-            profileUserNameEl.textContent = userFullName || roleData.name;
+            currentAppUserRole = roleKey;
+            currentAppUserFullName = userFullName || roleData.name;
+
+            profileUserNameEl.textContent = currentAppUserFullName;
             profileUserRoleEl.textContent = roleData.name;
 
-            const nameParts = (userFullName || roleData.name).split(' ');
+            const nameParts = (currentAppUserFullName).split(' ');
             let initials = nameParts[0] ? nameParts[0][0] : '';
             if (nameParts.length > 1 && nameParts[nameParts.length - 1]) {
                 initials += nameParts[nameParts.length - 1][0];
-            } else if (initials.length === 1 && (userFullName || roleData.name).length > 1) {
-                initials += (userFullName || roleData.name)[1] || '';
+            } else if (initials.length === 1 && (currentAppUserFullName).length > 1) {
+                initials += (currentAppUserFullName)[1] || '';
             }
             userAvatarEl.textContent = initials.toUpperCase() || roleData.avatarInitials;
 
@@ -893,23 +1017,95 @@
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = item.link;
-                if (item.active) a.classList.add('active');
                 a.innerHTML = `<i class="${item.icon} menu-icon"></i> <span class="menu-text">${item.name}</span>`;
                 li.appendChild(a);
                 sidebarMenuEl.appendChild(li);
             });
 
-            dashboardContentEl.innerHTML = roleData.dashboardHtml;
-            const welcomeNameElement = dashboardContentEl.querySelector(welcomeNameElSelector);
-            if (welcomeNameElement) {
-                welcomeNameElement.textContent = `Welcome back, ${userFullName || roleData.name}!`;
-            }
-
-            updateDynamicStats(roleKey);
-            updateRoleSpecificNotifications(roleKey); // Renamed to avoid confusion with header notifications
+            document.getElementById('dashboardContent').innerHTML = "<p>Loading content...</p>";
         }
 
-        // --- Function to toggle Sidebar ---
+        function loadFeatureView(featureKey) {
+            const dashboardContentEl = document.getElementById('dashboardContent');
+            const viewData = featureViewsConfig[featureKey];
+
+            if (viewData) {
+                dashboardContentEl.innerHTML = `
+                    <div class="feature-view-title-banner">
+                        <h1>${viewData.title}</h1>
+                    </div>
+                    ${viewData.html}
+                `;
+                updateSidebarActiveState(`#${featureKey}`);
+            } else {
+                console.warn(`Feature view for key "${featureKey}" not found. Loading default dashboard.`);
+                if (currentAppUserRole && userRolesConfig[currentAppUserRole]) {
+                    dashboardContentEl.innerHTML = userRolesConfig[currentAppUserRole].dashboardHtml;
+                    const welcomeNameElement = dashboardContentEl.querySelector('#welcomeName');
+                     if (welcomeNameElement) {
+                        welcomeNameElement.textContent = `Welcome back, ${currentAppUserFullName}!`;
+                    }
+                    updateDynamicStats(currentAppUserRole);
+                    updateRoleSpecificNotifications(currentAppUserRole);
+                    updateSidebarActiveState("#");
+                } else {
+                     dashboardContentEl.innerHTML = "<p>Content not found and user role is not set.</p>";
+                }
+            }
+        }
+
+        function updateSidebarActiveState(activeHref) {
+            const sidebarMenuEl = document.getElementById('sidebarMenu');
+            if (!sidebarMenuEl) return;
+            const links = sidebarMenuEl.querySelectorAll('a');
+            links.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === activeHref) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function handleHashChange() {
+            const dashboardContentEl = document.getElementById('dashboardContent');
+            const hash = window.location.hash.substring(1);
+
+            if (!hash || hash === "" || hash === "/") {
+                if (currentAppUserRole && userRolesConfig[currentAppUserRole]) {
+                    dashboardContentEl.innerHTML = userRolesConfig[currentAppUserRole].dashboardHtml;
+                    const welcomeNameElement = dashboardContentEl.querySelector('#welcomeName');
+                    if (welcomeNameElement) {
+                        welcomeNameElement.textContent = `Welcome back, ${currentAppUserFullName}!`;
+                    }
+                    updateDynamicStats(currentAppUserRole);
+                    updateRoleSpecificNotifications(currentAppUserRole);
+                    updateSidebarActiveState("#");
+                } else {
+                     dashboardContentEl.innerHTML = "<p>Please log in or select a role to view the dashboard.</p>";
+                     updateSidebarActiveState("");
+                }
+            } else if (featureViewsConfig[hash]) {
+                loadFeatureView(hash);
+            } else {
+                console.warn(`Hash "${hash}" not recognized. Loading default dashboard.`);
+                 if (currentAppUserRole && userRolesConfig[currentAppUserRole]) {
+                    dashboardContentEl.innerHTML = userRolesConfig[currentAppUserRole].dashboardHtml;
+                    const welcomeNameElement = dashboardContentEl.querySelector('#welcomeName');
+                     if (welcomeNameElement) {
+                        welcomeNameElement.textContent = `Welcome back, ${currentAppUserFullName}!`;
+                    }
+                    updateDynamicStats(currentAppUserRole);
+                    updateRoleSpecificNotifications(currentAppUserRole);
+                    updateSidebarActiveState("#");
+                } else {
+                    dashboardContentEl.innerHTML = `<p>Content for route "${hash}" not found and no default user role set.</p>`;
+                    updateSidebarActiveState("");
+                }
+            }
+        }
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.getElementById('sidebarToggleBtn');
@@ -928,8 +1124,10 @@
             }
         }
 
-        // --- Function to update dynamic stats (placeholder) ---
         function updateDynamicStats(roleKey) {
+            if (!document.getElementById('dashboardContent').querySelector('.welcome-banner')) {
+                return;
+            }
             if (roleKey === "rd-staff") {
                 document.getElementById('totalSubjects') && (document.getElementById('totalSubjects').textContent = '12');
                 document.getElementById('activePlans') && (document.getElementById('activePlans').textContent = '4');
@@ -944,51 +1142,49 @@
             }
         }
 
-        // --- Function to update role-specific notifications in the dashboard (placeholder) ---
         function updateRoleSpecificNotifications(roleKey) {
             let notificationHtml = '<ul><li><span class="notification-info"><span class="notification-title" style="color:#888">No new notifications.</span></span></li></ul>';
-            // This count is for dashboard notifications, not necessarily the header badge.
-            // The header badge is controlled by displayHeaderNotifications.
-            // let count = 0; // This 'count' variable was for the badge, which is now handled separately.
+            let targetElementId = '';
 
-            if (roleKey === "rd-staff") {
-                // count = 2; // Example: if this count was for the badge
-                notificationHtml = `
-                    <ul>
-                        <li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">System algorithm updated for checking.</span><span class="notification-meta">15 mins ago</span></span></li>
-                        <li><span class="notification-info"><span class="notification-title">Exam "Calculus Final" has been approved.</span><span class="notification-meta">2 hours ago</span></span></li>
-                    </ul>`;
-                document.getElementById('rdNotifications') && (document.getElementById('rdNotifications').innerHTML = notificationHtml);
-            } else if (roleKey === "lecturer") {
-                // count = 1;
-                notificationHtml = `
-                    <ul>
-                        <li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">New Task: Prepare 10 questions for "AI" subject.</span><span class="notification-meta">Just now</span></span></li>
-                    </ul>`;
-                document.getElementById('lecturerNotifications') && (document.getElementById('lecturerNotifications').innerHTML = notificationHtml);
+            if (roleKey === "rd-staff" && document.getElementById('rdNotifications')) {
+                notificationHtml = `<ul><li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">System algorithm updated.</span><span class="notification-meta">15m ago</span></span></li></ul>`;
+                targetElementId = 'rdNotifications';
+            } else if (roleKey === "lecturer" && document.getElementById('lecturerNotifications')) {
+                notificationHtml = `<ul><li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">New Task: AI questions.</span><span class="notification-meta">Now</span></span></li></ul>`;
+                targetElementId = 'lecturerNotifications';
+            } else if (roleKey === "subject-leader" && document.getElementById('slNotifications')) {
+                 notificationHtml = `<ul><li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">15 questions uploaded.</span><span class="notification-meta">30m ago</span></span></li></ul>`;
+                targetElementId = 'slNotifications';
+            } else if (roleKey === "head-dept" && document.getElementById('hodNotifications')) {
+                notificationHtml = `<ul><li><span class="new-dot"></span><span class="notification-info"><span class="notification-title">New plan for review.</span><span class="notification-meta">45m ago</span></span></li></ul>`;
+                targetElementId = 'hodNotifications';
             }
-            // Add more for other roles
-            // The line below was updating a badge. If this is a separate count/badge, it needs a different ID.
-            // For now, the header badge is handled by displayHeaderNotifications.
-            // const generalNotificationBadge = document.getElementById('notificationCountLayout');
-            // if (generalNotificationBadge) generalNotificationBadge.textContent = count; // Corrected ID
+
+            if (targetElementId) {
+                 const notificationElement = document.getElementById(targetElementId);
+                if (notificationElement) {
+                    notificationElement.innerHTML = notificationHtml;
+                }
+            }
         }
 
-
-        // --- Run when the page is loaded ---
         document.addEventListener('DOMContentLoaded', function() {
             const serverUserRole = '@User.FindFirst(ClaimTypes.Role)?.Value';
             const serverUserFullName = '@User.FindFirst("FullName")?.Value';
 
-            const currentUserRole = serverUserRole || "lecturer"; // Default to lecturer if not found
-            const currentUserFullName = serverUserFullName || userRolesConfig[currentUserRole]?.name || "User";
+            const resolvedUserRole = serverUserRole || "subject-leader";
+            const resolvedUserFullName = serverUserFullName || (userRolesConfig[resolvedUserRole] ? userRolesConfig[resolvedUserRole].name : "User");
 
-            if (userRolesConfig[currentUserRole]) {
-                loadDashboardForRole(currentUserRole, currentUserFullName);
+            if (userRolesConfig[resolvedUserRole]) {
+                loadDashboardForRole(resolvedUserRole, resolvedUserFullName);
             } else {
-                console.error("User role is invalid or not found from server: ", currentUserRole);
-                // Fallback to a default role display
-                loadDashboardForRole('lecturer', 'Default Lecturer');
+                console.error("User role is invalid or not found from server: ", resolvedUserRole);
+                document.getElementById('profileUserName').textContent = "Unknown User";
+                document.getElementById('profileUserRole').textContent = "Unknown Role";
+                document.getElementById('userAvatar').textContent = "?";
+                document.getElementById('sidebarMenu').innerHTML = '<li><a href="#" class="active"><i class="fas fa-tachometer-alt menu-icon"></i> <span class="menu-text">Dashboard</span></a></li>';
+                document.getElementById('dashboardContent').innerHTML = "<p style='color:red; text-align:center; margin-top: 20px;'>Error: User role config not found.</p>";
+                currentAppUserRole = '';
             }
 
             const sidebar = document.getElementById('sidebar');
@@ -1005,7 +1201,6 @@
                 if(text) text.textContent = "Collapse";
             }
 
-            // --- Notification Dropdown Logic ---
             const notificationIconWrapper = document.getElementById('notificationIconWrapperLayout');
             const notificationDropdown = document.getElementById('notificationDropdownContentLayout');
             const notificationBellContainer = document.getElementById('notificationBellContainerLayout');
@@ -1013,7 +1208,7 @@
             const notificationCountBadgeEl = document.getElementById('notificationCountLayout');
 
             function displayHeaderNotifications(notificationsData) {
-                headerNotificationListEl.innerHTML = ''; // Clear previous
+                headerNotificationListEl.innerHTML = '';
                 if (!notificationsData || notificationsData.length === 0) {
                     headerNotificationListEl.innerHTML = '<li class="no-notifications">No new notifications.</li>';
                     if (notificationCountBadgeEl) {
@@ -1022,49 +1217,82 @@
                     }
                     return;
                 }
+                const unreadNotifications = notificationsData.filter(notif => !notif.isRead);
 
-                notificationsData.forEach(notif => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <i class="${notif.icon || 'fas fa-info-circle'} notification-item-icon"></i>
-                        <div class="notification-item-content">
-                            <span class="notification-item-text">${notif.text}</span>
-                            <span class="notification-item-meta">${notif.time}</span>
-                        </div>
-                    `;
-                    if (notif.link) {
-                        li.addEventListener('click', () => { window.location.href = notif.link; });
-                    }
-                    headerNotificationListEl.appendChild(li);
-                });
+                if(unreadNotifications.length === 0){
+                     headerNotificationListEl.innerHTML = '<li class="no-notifications">No new notifications.</li>';
+                } else {
+                    unreadNotifications.forEach(notif => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <i class="${notif.icon || 'fas fa-info-circle'} notification-item-icon"></i>
+                            <div class="notification-item-content">
+                                <span class="notification-item-text">${notif.text}</span>
+                                <span class="notification-item-meta">${notif.time}</span>
+                            </div>`;
+                        if (notif.link) {
+                            li.addEventListener('click', () => {
+                                if (notif.link.startsWith("#")) {
+                                    window.location.hash = notif.link;
+                                } else {
+                                    window.location.href = notif.link;
+                                }
+                                notificationDropdown.classList.remove('active');
+                            });
+                        }
+                        headerNotificationListEl.appendChild(li);
+                    });
+                }
+
+                const badgeCount = unreadNotifications.length;
 
                 if (notificationCountBadgeEl) {
-                    notificationCountBadgeEl.textContent = notificationsData.length;
-                    notificationCountBadgeEl.style.display = 'block';
+                    if (badgeCount > 0) {
+                        notificationCountBadgeEl.textContent = badgeCount;
+                        notificationCountBadgeEl.style.display = 'block';
+                    } else {
+                        notificationCountBadgeEl.textContent = '0';
+                        notificationCountBadgeEl.style.display = 'none';
+                    }
                 }
             }
 
-            // Sample data for header notifications - replace with actual data fetching
             const sampleHeaderNotifications = [
-                
-                { icon: 'fas fa-user-plus', text: 'New feature: Bulk question import now available.', time: '2 hours ago', link: '#' },
-                { icon: 'fas fa-exclamation-triangle', text: 'System maintenance scheduled for this weekend.', time: '1 day ago', link: '#' }
+                { icon: 'fas fa-tasks', text: 'New plan assigned by Head of Department.', time: '1 hour ago', link: '#assign-plans', isRead: false },
+                { icon: 'fas fa-user-plus', text: 'Bulk question import now available.', time: '2 hours ago', link: '#questions', isRead: false },
+                { icon: 'fas fa-exclamation-triangle', text: 'System maintenance scheduled.', time: '1 day ago', link: '@Url.Action("Index", "Notification")', isRead: true }
             ];
-
-            displayHeaderNotifications(sampleHeaderNotifications); // Populate with sample data
+            displayHeaderNotifications(sampleHeaderNotifications);
 
             if (notificationIconWrapper && notificationDropdown && notificationBellContainer) {
                 notificationIconWrapper.addEventListener('click', function(event) {
                     event.stopPropagation();
                     notificationDropdown.classList.toggle('active');
                 });
+            }
 
-                document.addEventListener('click', function(event) {
-                    if (notificationDropdown.classList.contains('active') && !notificationBellContainer.contains(event.target)) {
-                        notificationDropdown.classList.remove('active');
-                    }
+            const userProfileTrigger = document.getElementById('userProfileTrigger');
+            const userDropdownContent = document.getElementById('userDropdownContent');
+            const userMenuContainer = document.getElementById('userMenuContainer');
+
+            if (userProfileTrigger && userDropdownContent && userMenuContainer) {
+                userProfileTrigger.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    userDropdownContent.classList.toggle('active');
                 });
             }
+
+            document.addEventListener('click', function(event) {
+                if (notificationDropdown && notificationDropdown.classList.contains('active') && !notificationBellContainer.contains(event.target)) {
+                    notificationDropdown.classList.remove('active');
+                }
+                if (userDropdownContent && userDropdownContent.classList.contains('active') && !userMenuContainer.contains(event.target)) {
+                    userDropdownContent.classList.remove('active');
+                }
+            });
+
+            window.addEventListener('hashchange', handleHashChange);
+            handleHashChange();
         });
     </script>
 

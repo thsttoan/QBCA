@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations; // << THÊM DÒNG NÀY
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QBCAWEB.Models
 {

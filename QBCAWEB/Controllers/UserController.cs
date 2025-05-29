@@ -1,6 +1,4 @@
-﻿// --- START OF FILE UserController.cs ---
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QBCAWEB.Data;
 using QBCAWEB.Models;
@@ -8,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BCrypt.Net; // Thêm using cho BCrypt nếu chưa có ở đầu (đã có trong file AuthController của bạn)
+using BCrypt.Net;
 
 namespace QBCAWEB.Controllers
 {
@@ -223,4 +221,3 @@ namespace QBCAWEB.Controllers
         }
     }
 }
-// --- END OF FILE UserController.cs ---
