@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Subject Management";
+    Layout = "_DashboardLayout";
+}
+<h3>Subject Management</h3>
+<div>
+    <h4>Create New Subject</h4>
+    <form asp-action="CreateSubject" method="post">
+        <div>
+            <label for="subjectName">Subject Name:</label>
+            <input type="text" id="subjectName" name="subjectName" required />
+        </div>
+        <div>
+            <label for="clos">Course Learning Outcomes (CLOs):</label>
+            <textarea id="clos" name="clos" rows="4" required></textarea>
+        </div>
+        <div>
+            <label for="difficultyLevel">Difficulty Level:</label>
+            <select id="difficultyLevel" name="difficultyLevel" required>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+        </div>
+        <button type="submit">Create Subject</button>
+    </form>
+</div>
+<div>
+    <h4>Assign Question Plan</h4>
+    <form asp-action="AssignPlan" method="post">
+        <div>
+            <label for="subjectId">Select Subject:</label>
+            <select id="subjectId" name="subjectId" required>
+                <!-- Populated dynamically from database -->
+                <option value="">Select a subject</option>
+                @foreach (var subject in ViewBag.Subjects ?? new List<object>())
+                {
+                    <option value="@subject.Id">@subject.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="questionCount">Number of Questions:</label>
+            <input type="number" id="questionCount" name="questionCount" min="1" required />
+        </div>
+        <button type="submit">Assign Plan</button>
+    </form>
+</div>
+<div class="notifications">
+    <h4>Recent Notifications</h4>
+    <ul>
+        @if (ViewBag.Notifications != null)
+        {
+            foreach (var notification in ViewBag.Notifications)
+            {
+                <li>@notification.Message - @notification.DateTime</li>
+            }
+        }
+        else
+        {
+            <li>No recent notifications.</li>
+        }
+    </ul>
+</div>

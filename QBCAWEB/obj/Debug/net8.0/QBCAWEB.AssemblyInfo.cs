@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QBCAWEB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2aecef9e544a8e1372e553c2b0b31bf1a8fc8fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b6c964229075ee8109809f7f5ab5d3646191d31")]
 [assembly: System.Reflection.AssemblyProductAttribute("QBCAWEB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QBCAWEB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

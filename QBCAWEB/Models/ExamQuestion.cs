@@ -8,7 +8,7 @@
         public double Percentage { get; set; } // Difficulty percentage
         
         // Navigation properties
-        public virtual Exam Exam { get; set; } = null!;
+        public virtual ExamPlan Exam { get; set; } = null!;
         public virtual Question Question { get; set; } = null!;
     }
 }
