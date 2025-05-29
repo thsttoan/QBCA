@@ -3,48 +3,16 @@
   "WorkspaceRootPath": "E:\\CNPM\\Project\\QBCAWEB\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\models\\createuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\models\\createuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\controllers\\rndstaff\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\controllers\\rndstaff\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\rndstaff\\subject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\rndstaff\\subject.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\dashboard\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\dashboard\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\qbcaweb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\qbcaweb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\shared\\_dashboardlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\shared\\_dashboardlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|e:\\cnpm\\project\\qbcaweb\\qbcaweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5D6C2FBE-563C-4453-B888-479E3B72A419}|QBCAWEB\\QBCAWEB.csproj|solutionrelative:qbcaweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,153 +22,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CreateUserDto.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\CreateUserDto.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Models\\CreateUserDto.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\CreateUserDto.cs",
-              "RelativeToolTip": "QBCAWEB\\Models\\CreateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T14:51:41.065Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DashboardController.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\DashboardController.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Controllers\\DashboardController.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\DashboardController.cs",
-              "RelativeToolTip": "QBCAWEB\\Controllers\\DashboardController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T14:45:20.724Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "NotificationController.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\NotificationController.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Controllers\\NotificationController.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\NotificationController.cs",
-              "RelativeToolTip": "QBCAWEB\\Controllers\\NotificationController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T14:45:15.503Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Program.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Program.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Program.cs",
-              "RelativeToolTip": "QBCAWEB\\Program.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T14:43:33.962Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SubjectController.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\RndStaff\\SubjectController.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Controllers\\RndStaff\\SubjectController.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\RndStaff\\SubjectController.cs",
-              "RelativeToolTip": "QBCAWEB\\Controllers\\RndStaff\\SubjectController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T14:42:29.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "QBCAWEB",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\QBCAWEB.csproj",
-              "RelativeDocumentMoniker": "QBCAWEB\\QBCAWEB.csproj",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\QBCAWEB.csproj",
-              "RelativeToolTip": "QBCAWEB\\QBCAWEB.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-29T14:37:10.556Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_DashboardLayout.cshtml",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Shared\\_DashboardLayout.cshtml",
-              "RelativeDocumentMoniker": "QBCAWEB\\Views\\Shared\\_DashboardLayout.cshtml",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Shared\\_DashboardLayout.cshtml",
-              "RelativeToolTip": "QBCAWEB\\Views\\Shared\\_DashboardLayout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-29T14:35:20.693Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Subject.cshtml",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\RndStaff\\Subject.cshtml",
-              "RelativeDocumentMoniker": "QBCAWEB\\Views\\RndStaff\\Subject.cshtml",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\RndStaff\\Subject.cshtml",
-              "RelativeToolTip": "QBCAWEB\\Views\\RndStaff\\Subject.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-29T14:33:51.728Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Subject.cs",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\Subject.cs",
-              "RelativeDocumentMoniker": "QBCAWEB\\Models\\Subject.cs",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Models\\Subject.cs",
-              "RelativeToolTip": "QBCAWEB\\Models\\Subject.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAwBMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "QBCAWEB\\Controllers\\HomeController.cs",
+              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "QBCAWEB\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-29T14:07:46.044Z",
+              "WhenOpened": "2025-05-29T15:15:27.618Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "QBCAWEB\\Views\\Home\\Index.cshtml",
               "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "QBCAWEB\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAK8CAAAAAAAAAAAAALACAABAAAAAAAAAAA==",
+              "ViewState": "AgIAALMHAAAAAAAAAAAAwJsHAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-29T14:07:26.218Z",
+              "WhenOpened": "2025-05-29T15:15:16.16Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Dashboard\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "QBCAWEB\\Views\\Dashboard\\_Layout.cshtml",
-              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Dashboard\\_Layout.cshtml",
-              "RelativeToolTip": "QBCAWEB\\Views\\Dashboard\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "QBCAWEB\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\CNPM\\Project\\QBCAWEB\\QBCAWEB\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "QBCAWEB\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-29T14:06:17.777Z",
+              "WhenOpened": "2025-05-29T15:18:45.531Z",
               "EditorCaption": ""
             }
           ]

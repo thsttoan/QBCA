@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null; // Trang này không cần layout chung, hoặc bạn có thể chỉ định layout khác
+    Layout = null;
     ViewData["Title"] = "Logged Out";
 }
 
@@ -87,7 +87,7 @@
     <script type="text/javascript">
         setTimeout(function () {
             window.location.href = '@Url.Action("Login", "Auth")';
-        }, 3000); // Chuyển hướng sau 3 giây (3000 mili giây)
+        }, 3000);
     </script>
 </body>
 </html>

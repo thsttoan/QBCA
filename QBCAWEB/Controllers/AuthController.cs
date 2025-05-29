@@ -1,6 +1,4 @@
-﻿// --- START OF FILE AuthController.cs ---
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
@@ -164,8 +162,6 @@ namespace QBCAWEB.Controllers
         }
     }
 
-    // Lớp UserInfo này có thể không còn cần thiết nữa nếu AuthController không sử dụng.
-    // Bạn có thể xóa nó nếu không có phần nào khác trong ứng dụng của bạn phụ thuộc vào nó.
     public class UserInfo
     {
         public string Username { get; set; } = string.Empty;
@@ -174,4 +170,3 @@ namespace QBCAWEB.Controllers
         public string FullName { get; set; } = string.Empty;
     }
 }
-// --- END OF FILE AuthController.cs ---
